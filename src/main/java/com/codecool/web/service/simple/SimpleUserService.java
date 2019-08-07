@@ -2,16 +2,17 @@ package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
-import com.codecool.web.service.LoginService;
+import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
 
+import java.security.Provider;
 import java.sql.SQLException;
 
-public final class SimpleLoginService implements LoginService {
+public final class SimpleUserService implements UserService {
 
     private final UserDao userDao;
 
-    public SimpleLoginService(UserDao userDao) {
+    public SimpleUserService(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -26,5 +27,25 @@ public final class SimpleLoginService implements LoginService {
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
         }
+    }
+
+    @Override
+    public User findUserById(int id) throws SQLException, ServiceException {
+        try {
+            return userDao.findUserById(id);
+        }
+        catch (IllegalArgumentException e) {
+            throw new ServiceException("Not Found!");
+        }
+    }
+
+    @Override
+    public void registerUser(User user) throws SQLException {
+        userDao.registerUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) throws SQLException {
+        userDao.updateUser(user);
     }
 }

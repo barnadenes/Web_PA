@@ -96,6 +96,7 @@ function setUnauthorized() {
 }
 
 function onLoad() {
+    localStorage.clear();
     loginContentDivEl = document.getElementById('login-register-container');
     headerContentDivEl = document.getElementById('site-header');
     carouselContentDivEl = document.getElementById('carousel');
