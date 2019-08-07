@@ -1,6 +1,6 @@
 # About
 
-A small web project for CodeCool Personal Assessment. (Sloth Comics manga store).
+A small web project for my CodeCool Personal Assessment. (Sloth Comics manga store).
 
 ## `DataSource`
 
