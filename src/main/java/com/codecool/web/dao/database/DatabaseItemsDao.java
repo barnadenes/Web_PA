@@ -1,12 +1,10 @@
 package com.codecool.web.dao.database;
 
 import com.codecool.web.dao.ItemsDao;
-import com.codecool.web.model.Item;
+import com.codecool.web.model.ShopItem;
+import com.codecool.web.model.ShopItems;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +15,9 @@ public class DatabaseItemsDao extends AbstractDao implements ItemsDao {
     }
 
     @Override
-    public List<Item> findAllItem() throws SQLException {
-        List<Item> itemList = new ArrayList<>();
-        String sql = "select * from items";
+    public List<ShopItem> findAllItem() throws SQLException {
+        List<ShopItem> itemList = new ArrayList<>();
+        String sql = "select item_id, title, url from items";
 
         try(Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql)) {
@@ -30,13 +28,33 @@ public class DatabaseItemsDao extends AbstractDao implements ItemsDao {
         return itemList;
     }
 
-    private Item fetchItem(ResultSet rs) throws SQLException {
+    @Override
+    public ShopItems findItemById(int id) throws SQLException {
+        String sql = "SELECT * FROM items WHERE item_id = ?";
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return fetchItems(rs);
+            }
+        }
+        return null;
+    }
+
+    private ShopItems fetchItems(ResultSet rs) throws SQLException {
         int id = rs.getInt("item_id");
         String title = rs.getString("title");
         String author = rs.getString("author");
         String url = rs.getString("url");
         String plot = rs.getString("plot");
         int price = rs.getInt("price");
-        return new Item(id, title, author, url, plot, price);
+        return new ShopItems(id, title, author, url, plot, price);
+    }
+
+    private ShopItem fetchItem(ResultSet rs) throws SQLException {
+        int id = rs.getInt("item_id");
+        String title = rs.getString("title");
+        String url = rs.getString("url");
+        return new ShopItem(id, title, url);
     }
 }
