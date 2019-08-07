@@ -1,0 +1,362 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: open sans,helvetica neue,Helvetica,Arial,sans-serif;
+    justify-content: space-between;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    background-color: linen;
+}
+
+.site-header {
+    box-shadow: 0 7px 4px rgba(0, 0, 0, 0.4);
+    background-image: url(img/navBackground.jpg);
+    background-size: 150px;
+    position: relative;
+    z-index: 2;
+    border-radius: 0% 0% 60% 0%;
+    border-bottom: 10px solid darkgoldenrod;
+    height: 150px;
+}
+
+#header-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+#site-header__main {
+    display: inline-block;
+    max-width: 100%;
+    padding-top: 10px;
+}
+
+.site-title {
+    background-color: #fff;
+    display: block;
+    padding: 1.25rem .25rem .25rem;
+    text-align: center;
+    background: 0 0;
+    max-width: 22rem;
+    padding: 0;
+    color: #939597;
+}
+
+#nav-id {
+    display: flex;
+    justify-content: space-between;
+    list-style: cjk-ideographic;
+    font-style: oblique;
+    font-size: 20px;
+    max-height: 100px;
+}
+
+.nav-li-el {
+    margin-left: 50px;
+    font-weight: 900;
+    font-size: 1.5vw;
+    background: #c7b48d4f;
+    cursor: pointer;
+    border-radius: 50% 0% 50% 0%;
+    border-top: 5px solid darkgoldenrod;
+}
+
+.nav-li-el:hover {
+    border-bottom: 5px solid darkgoldenrod;
+    border-radius: 0% 50% 0% 50%;
+}
+
+.mySlides {
+    display:none;
+    height: 180px;
+}
+
+.mySlides{
+    width: 100%;
+    height: 500px;
+}
+
+.carousel {
+    position: relative;
+    top: -1pc;
+    width: 100%;
+    box-shadow: 0px 0px 17px 1px black;
+}
+
+.login-register-form {
+    background: url(img/login-background.jpg) no-repeat;
+    width: 1000px;
+    height: 700px;
+    background-size: cover;
+    box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.5);
+    position: absolute;
+}
+
+.form-cover {
+    background: linen;
+    width: 33%;
+    margin-left: -19%;
+}
+
+#login-register-container {
+    margin-top: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+#login-register-header-button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 10px;
+}
+
+#login-body {
+    display: grid;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.login-register-button {
+    background: bisque;
+    width: 40%;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 3px;
+    margin: 0 auto !important;
+}
+
+#register-body {
+    display: grid;
+    width: 80%;
+    margin: 0 auto;
+    grid-gap: 15px;
+}
+
+#shop-body {
+    height: 100%;
+    display: grid;
+    grid-gap: 20px;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    grid-template-columns: repeat(4, 0.2fr);
+    grid-auto-rows: 250px;
+    justify-content: center;
+    align-content: center;
+}
+
+.shop-head {
+    background: url('img/kep.jpg');
+    width: 200px;
+    height: auto;
+    background-size: cover;
+    padding-top: 80%;
+    cursor: pointer;
+}
+
+.shop-head p {
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    background-color: darkgoldenrod;
+}
+
+
+#user-info-body {
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    border: 4px solid #b8860b;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 3px 3px 10px 0px black;
+    margin-bottom: 1%;
+    background: palegoldenrod;
+    font-family: monospace;
+    text-align: center;
+}
+
+#user-info-body input {
+    padding: 10px;
+    margin: 0 auto !important;
+    display: block;
+}
+
+#update-user {
+    background: bisque;
+    width: 15%;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 2px solid darkgoldenrod;
+}
+
+
+#ui-h2 {
+    text-align: center;
+    background-color: darkgoldenrod;
+    padding: 10px;
+    margin-top: 0;
+    color: black;
+    font-weight: 700;
+}
+
+.checkout-body {
+    height: 100%;
+    display: grid;
+    grid-gap: 20px;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    grid-template-columns: repeat(1, 0.8fr);
+    grid-auto-rows: 110px;
+    justify-content: center;
+    align-content: center;
+}
+
+.checkout-h1{
+    text-align: center;
+    margin: 0;
+    padding-top: 3vw;
+}
+
+.checkout-item {
+    padding-top: 20px;
+    border: 2px solid darkgoldenrod;
+    padding-left: 20px;
+    background: antiquewhite;
+}
+
+.checkout-footer{
+    text-align: center;
+}
+
+.buy-order-button {
+    background: bisque;
+    width: 15%;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 2px solid darkgoldenrod;
+}
+
+.cancel-order-button{
+    float: right;
+    margin-right: 20px;
+    background: coral;
+}
+
+#admin-add {
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    border: 4px solid #b8860b;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 3px 3px 10px 0px black;
+    margin-bottom: 1%;
+    background: palegoldenrod;
+    font-family: monospace;
+    text-align: center;
+}
+
+#admin-add input {
+    display: grid;
+    margin-top: 5px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#create-post {
+    background: beige;
+    border: 3px solid darkgoldenrod;
+    padding: 0 10px 0 10px;
+    color: black;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}
+
+.item-view-body {
+    width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 10px 30px 10px;
+}
+
+.item-view {
+    width: 50%;
+    display: block;
+    float: left;
+    min-height: 1px;
+}
+
+.item-view p {
+    margin-bottom: 15px;
+}
+
+.item-view button {
+    background: bisque;
+    width: auto;
+    cursor: pointer;
+    margin: 20px 0 0 0 !important;
+    border: 2px solid darkgoldenrod;
+    padding: 10px 15px 10px 15px;
+}
+
+.item-price {
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+img {
+    width: 400px;
+}
+
+nav {
+    padding-top: 30px;
+}
+
+button {
+    background: transparent;
+    border-color: transparent;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: orangered;
+    cursor: pointer;
+    margin-left: 10px !important;
+}
+
+h1 {
+    color: #939597;
+}
+
+hr {
+    background-color: darkgray; 
+    height: 1px !important;
+}
+
+input {
+    padding: 3px;
+    box-shadow: inset 0px 0px 2px 0px;
+}
+
+p {
+    margin: 0 !important;
+}
+
+.error {
+    color: red;
+}
+
+.info {
+    color: blue;
+}
+
+.hidden {
+    display: none !important;
+}
+
