@@ -41,6 +41,11 @@ public class DatabaseItemsDao extends AbstractDao implements ItemsDao {
         return null;
     }
 
+    @Override
+    public void addItem(ShopItem item) throws SQLException {
+
+    }
+
     private ShopItems fetchItems(ResultSet rs) throws SQLException {
         int id = rs.getInt("item_id");
         String title = rs.getString("title");

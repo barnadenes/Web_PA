@@ -51,12 +51,45 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
 
     @Override
     public List<Checkout> findCheckoutByUser(int userId) throws SQLException {
-        return null;
+        List<Checkout> personalList = new ArrayList<>();
+        String sql = "SELECT checkout_id, book_title, buyer, price FROM checkout " +
+            "JOIN users ON users.email = checkout.buyer WHERE user_id = ?";
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs =  ps.executeQuery();
+            while(rs.next()) {
+                personalList.add(fetchCheckout(rs));
+            }
+        }
+        return personalList;
     }
 
     @Override
-    public void deleteCheckout(int checkoutId) throws SQLException {
+    public void deleteCheckout(int userId , int checkoutId) throws SQLException {
+        String sql = "DELETE FROM user_checkout_table WHERE user_id = ? AND checkout_id = ?";
 
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, checkoutId);
+            ps.execute();
+        }
+    }
+
+    @Override
+    public boolean inCart(int userId, int checkoutId) throws SQLException {
+        String sql =  "SELECT * FROM user_checkout_table WHERE user_id = ? AND checkout_id = ?";
+
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, checkoutId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 
     @Override

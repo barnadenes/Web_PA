@@ -11,11 +11,11 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     name TEXT NOT NULL,
-    country TEXT,
-    city TEXT,
-    street TEXT,
-    zip_code TEXT,
-    money INTEGER,
+    country TEXT NOT NULL,
+    city TEXT NOT NULL,
+    street TEXT NOT NULL,
+    zip_code TEXT NOT NULL,
+    money INTEGER NOT NULL,
     status BOOLEAN DEFAULT FALSE,
 	CONSTRAINT email_not_empty CHECK (email <> ''),
 	CONSTRAINT password_not_empty CHECK (password <> '')
@@ -45,12 +45,17 @@ CREATE TABLE user_checkout_table (
     FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id)
 );
 
+INSERT INTO user_checkout_table (user_id, checkout_id) VALUES
+(1, 1),
+(1, 2);
+
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
     ('user1@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
 
 INSERT INTO checkout (book_title, buyer, price) VALUES
-('Dr Stone', 'Denes', 10);
+('Dr Stone', 'user1@user1', 10),
+('Something', 'user1@user1', 10);
 
 INSERT INTO items (title, author, url, plot, price) VALUES
 	('Dr. Stone', 'Riichiro Inagaki', 'https://i.redd.it/dqpph2imkoe31.jpg', 'One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he''s got a grand plan in mind—to kickstart civilization with the power of science!', 10),
