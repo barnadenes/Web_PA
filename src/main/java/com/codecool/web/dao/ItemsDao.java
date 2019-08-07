@@ -5,7 +5,7 @@ import com.codecool.web.model.Item;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface itemsDao {
+public interface ItemsDao {
 
     List<Item> findAllItem() throws SQLException;
 }

@@ -3,8 +3,6 @@ package com.codecool.web.dao;
 import com.codecool.web.model.User;
 
 import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.util.List;
 
 public interface UserDao {
 
