@@ -11,4 +11,6 @@ public interface ItemsDao {
     List<ShopItem> findAllItem() throws SQLException;
 
     ShopItems findItemById(int id) throws SQLException;
+
+    void addItem(ShopItem item) throws SQLException;
 }
