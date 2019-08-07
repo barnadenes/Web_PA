@@ -41,6 +41,7 @@ public final class SimpleUserService implements UserService {
 
     @Override
     public void registerUser(User user) throws SQLException {
+        userDao.isRegistered(user.getEmail());
         userDao.registerUser(user);
     }
 

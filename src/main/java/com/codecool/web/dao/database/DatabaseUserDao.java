@@ -43,7 +43,6 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
 
     @Override
     public void registerUser(User user) throws SQLException {
-        isRegistered(user.getEmail());
         String sql = "INSERT INTO users VALUES " +
             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
