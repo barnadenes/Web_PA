@@ -17,7 +17,7 @@ public final class SimpleCheckoutService implements CheckoutService {
 
     @Override
     public void addToCart(Checkout item) throws SQLException {
-        
+
     }
 
     @Override

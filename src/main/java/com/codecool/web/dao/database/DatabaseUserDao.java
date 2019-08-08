@@ -42,29 +42,35 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public void registerUser(User user) throws SQLException {
-        String sql = "INSERT INTO users VALUES " +
-            "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException {
+        String sql = "INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES " +
+            "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try(PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, user.getId());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getName());
-            statement.setString(5, user.getCountry());
-            statement.setString(6, user.getCity());
-            statement.setString(7, user.getStreet());
-            statement.setString(8, user.getZipcode());
-            statement.setInt(9, user.setMoney(20));
-            statement.setBoolean(10, user.setStatus(false));
+        try(PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setString(3, name);
+            statement.setString(4, country);
+            statement.setString(5, city);
+            statement.setString(6, street);
+            statement.setString(7, zip);
+            statement.setInt(8, money);
+            statement.setBoolean(9, status);
 
             executeInsert(statement);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                return fetchUser(rs);
+            }
+        } catch (SQLException e) {
+            throw e;
         }
+        throw new IllegalArgumentException();
     }
 
     @Override
     public void updateUser(User user) throws SQLException {
-        String sql = "UPDATE users SET (email, name, country, city, street, zip_code, money,                            status) = (?, ?, ?, ?, ?, ?, ?) WHERE user_id = ?";
+        String sql = "UPDATE users SET (email, name, country, city, street, zip_code, money, status) = (?, ?, ?, ?, ?, ?, ?) WHERE user_id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getName());
@@ -86,9 +92,6 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
                 throw new SQLException("Already Registered Mail Address!");
-            }
-            else {
-                throw new SQLException("Haven't Registered Yet!");
             }
         }
     }

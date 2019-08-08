@@ -101,7 +101,10 @@ function onLoad() {
     headerContentDivEl = document.getElementById('site-header');
     carouselContentDivEl = document.getElementById('carousel');
     itemsContentDivEl = document.getElementById('shop-body');
+    loginButtonContentDivEl = document.getElementById('login-button');
 
+    const registerButtonEl = document.getElementById('register-button');
+    registerButtonEl.addEventListener('click', onRegisterButtonClicked);
 
     const loginButtonEl = document.getElementById('login-button');
     loginButtonEl.addEventListener('click', onLoginButtonClicked);

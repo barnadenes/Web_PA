@@ -45,10 +45,6 @@ CREATE TABLE user_checkout_table (
     FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id)
 );
 
-INSERT INTO user_checkout_table (user_id, checkout_id) VALUES
-(1, 1),
-(1, 2);
-
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
     ('user1@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);

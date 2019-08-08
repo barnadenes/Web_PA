@@ -40,9 +40,10 @@ public final class SimpleUserService implements UserService {
     }
 
     @Override
-    public void registerUser(User user) throws SQLException {
-        userDao.isRegistered(user.getEmail());
-        userDao.registerUser(user);
+    public User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException {
+        userDao.isRegistered(email);
+        return userDao.registerUser(email, password, name, country, city, street, zip, money, status);
+
     }
 
     @Override

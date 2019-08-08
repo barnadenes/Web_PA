@@ -4,7 +4,7 @@ import java.util.Objects;
 
 abstract class AbstractModel {
 
-    private int id;
+    protected int id;
 
     public AbstractModel(int id) {
         this.id = id;

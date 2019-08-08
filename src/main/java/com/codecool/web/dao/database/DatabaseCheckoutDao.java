@@ -71,7 +71,7 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ps.setInt(2, checkoutId);
-            ps.execute();
+            ps.executeUpdate();
         }
     }
 

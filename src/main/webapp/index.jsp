@@ -24,6 +24,7 @@
     <c:url value="/item.js" var="itemScriptUrl"/>
     <c:url value="/checkout.js" var="checkoutScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
+    <c:url value="/register.js" var="registerScriptUrl"/>
     <script src="${indexScriptUrl}"></script>
     <script src="${sliderScriptUrl}"></script>
     <script src="${backScriptUrl}"></script>
@@ -35,6 +36,7 @@
     <script src="${itemScriptUrl}"></script>
     <script src="${checkoutScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
+    <script src="${registerScriptUrl}"></script>
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 
@@ -57,14 +59,16 @@
                 </form>
             </div>
             <div id="register-body" class="hidden content">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Country">
-                <input type="text" placeholder="City">
-                <input type="text" placeholder="Street">
-                <input type="text" placeholder="Zip-code"><hr>
-                <button id="register-button" class="login-register-button"><h2>Enter</h2></button><hr>
+                <form onsubmit="return false;" id="register-form" >
+                    <input type="text" placeholder="Username" id="name">
+                    <input type="password" placeholder="Password" id="password">
+                    <input type="text" placeholder="Email" id="email">
+                    <input type="text" placeholder="Country" id="country">
+                    <input type="text" placeholder="City" id="city">
+                    <input type="text" placeholder="Street" id="street">
+                    <input type="text" placeholder="Zip-code" id="zip"><hr>
+                    <button id="register-button" class="login-register-button"><h2>Enter</h2></button><hr>
+                </form>
             </div>
         </div>
      </div>

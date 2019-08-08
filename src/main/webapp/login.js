@@ -2,8 +2,13 @@ function onLoginResponse() {
     if (this.status === OK) {
         const user = JSON.parse(this.responseText);
         setAuthorization(user);
-        onSiteLoad(user);
-    } else {
+        if(hasAuthorization()){
+            onSiteLoad(user);
+        }
+    }else if(this.status === INTERNAL_SERVER_ERROR){
+        window.alert("Some requested field is empty");
+    }
+    else {
         onOtherResponse(loginButtonContentDivEl, this);
     }
 }
