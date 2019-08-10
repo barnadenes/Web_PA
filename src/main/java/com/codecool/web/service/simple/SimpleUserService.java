@@ -48,18 +48,19 @@ public final class SimpleUserService implements UserService {
 
     @Override
     public User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException, ServiceException {
-        try{
-            userDao.isRegistered(email);
+        userDao.isRegistered(email);
+        if (!email.isEmpty() | !password.isEmpty() | !name.isEmpty() | !country.isEmpty() | !city.isEmpty() | !street.isEmpty() | !zip.isEmpty()) {
             return userDao.registerUser(email, password, name, country, city, street, zip, money, status);
-        } catch (NullPointerException e) {
-            throw new ServiceException(e.getMessage() + "Please Use All Fields!");
-        }
 
+        } else {
+            throw new ServiceException("Please Use All Fields!");
+        }
     }
+
 
     @Override
     public User updateUser(int id, String email, String name, String country, String city, String street, String zip, String money) throws SQLException, ServiceException {
-        try{
+        try {
             userDao.updateUser(id, email, name, country, city, street, zip, Integer.valueOf(money));
             return findByEmail(email);
         } catch (NumberFormatException e) {

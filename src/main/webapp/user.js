@@ -53,7 +53,6 @@ function onUIUpdateButtonClicked() {
 }
 
 function onUserResponse() {
-    clearMessages();
     if (this.status === OK) {
         setUnauthorized();
 
