@@ -114,16 +114,6 @@
     </div>
 
     <div id="shop-body" class="hidden content">
-        <div id="1" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="2" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="3" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="4" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="5" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="6" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="7" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="8" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="9" class="shop-head"><p class="shop-item-title">One Piece</p></div>
-        <div id="10" class="shop-head"><p class="shop-item-title">One Piece</p></div>
     </div>
 
     <div id="item-view-body" class="item-view-body hidden content">

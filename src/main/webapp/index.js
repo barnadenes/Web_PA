@@ -125,8 +125,8 @@ function onLoad() {
     const checkoutButtonEl = document.getElementById('nav-checkout-button');
     checkoutButtonEl.addEventListener('click', onCheckoutButtonClicked);
 
-    const tempEl = document.getElementById('1');
-    tempEl.addEventListener('click', onItemClicked);
+    // const tempEl = document.getElementById('1');
+    // tempEl.addEventListener('click', onItemClicked);
 
     const backButtonEl = document.getElementById('back-button');
     backButtonEl.addEventListener('click', onBackButtonClicked);
@@ -135,7 +135,7 @@ function onLoad() {
     // addItemButtonEl.addEventListener('click', onAddItemButtonClicked);
 
     if (hasAuthorization()) {
-        onSiteLoad(getAuthorization());
+        onShopButtonClicked(getAuthorization());
     }
 }
 

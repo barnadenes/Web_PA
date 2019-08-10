@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DatabaseItemsDao extends AbstractDao implements ItemsDao {
 
-    DatabaseItemsDao(Connection connection) {
+    public DatabaseItemsDao(Connection connection) {
         super(connection);
     }
 

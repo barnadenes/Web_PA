@@ -18,7 +18,7 @@ public final class SimpleItemsService implements ItemsService {
 
     @Override
     public List<ShopItem> findAllItem() throws SQLException {
-        return null;
+        return itemsDao.findAllItem();
     }
 
     @Override

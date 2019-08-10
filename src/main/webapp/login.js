@@ -3,7 +3,7 @@ function onLoginResponse() {
         const user = JSON.parse(this.responseText);
         setAuthorization(user);
         if(hasAuthorization()){
-            onSiteLoad(user);
+            onShopButtonClicked();
         }
     }else if(this.status === INTERNAL_SERVER_ERROR){
         onOtherResponse(registerButtonDivEl, this)
