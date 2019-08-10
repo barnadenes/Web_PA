@@ -15,30 +15,30 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/register")
-public class RegisterServlet extends AbstractServlet{
+@WebServlet("/userInfo")
+public class UserServlet extends AbstractServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())) {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try{Connection connection = getConnection(req.getServletContext());
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new SimpleUserService(userDao);
+            User current = (User) req.getSession().getAttribute("user");
+            int id = current.getId();
 
-            String username = req.getParameter("name");
             String email = req.getParameter("email");
-            String password = req.getParameter("password");
+            String name = req.getParameter("name");
             String country = req.getParameter("country");
             String city = req.getParameter("city");
             String street = req.getParameter("street");
+            String money = req.getParameter("money");
             String zip = req.getParameter("zip");
 
-            User user = userService.registerUser(email, password, username, country, city, street, zip, 20, false);
+            User user = userService.updateUser(id, email, name, country, city, street, zip, money);
 
-            req.getSession().setAttribute("user", user);
-
-            sendMessage(resp, HttpServletResponse.SC_OK, user);
-        } catch (SQLException | ServiceException ex) {
-            handleSqlError(resp, ex);
+            sendMessage(resp, HttpServletResponse.SC_OK, userService.findUserById(user.getId()));
+        } catch (SQLException | ServiceException e) {
+            handleSqlError(resp,e);
         }
     }
 }

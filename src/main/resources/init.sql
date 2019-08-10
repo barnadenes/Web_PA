@@ -47,7 +47,7 @@ CREATE TABLE user_checkout_table (
 
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
-    ('user1@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
+    ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
 
 INSERT INTO checkout (book_title, buyer, price) VALUES
 ('Dr Stone', 'user1@user1', 10),

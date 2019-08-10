@@ -102,13 +102,13 @@
      <div id="user-info-body" class="hidden content">
         <h2 id="ui-h2">User Info</h2>
          <form id="user-form" onsubmit="return false">
-            <b>Name: </b><input type="text" placeholder="Silver Cookie">
-            <b>E-mail: </b><input type="text" placeholder="loghorizon32">
-            <b>Country: </b><input type="text" placeholder="Hungary">
-            <b>City: </b><input type="text" placeholder="Miskolc">
-            <b>Street: </b> <input type="text" placeholder="Elm st.">
-            <b>Zip-code: </b><input type="text" placeholder="3535">
-            <b>Money: </b><input type="text" placeholder="1500$">
+            <b>Name: </b><input type="text" name="name">
+            <b>E-mail: </b><input type="text" name="email">
+            <b>Country: </b><input type="text" name="country">
+            <b>City: </b><input type="text"  name="city">
+            <b>Street: </b> <input type="text" name="street">
+            <b>Zip-code: </b><input type="text" name="zip">
+            <b>Money: </b><input type="text" name="money">
             <button id="update-user"><h2>Update</h2></button>
          </form>
     </div>

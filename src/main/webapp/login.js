@@ -6,7 +6,7 @@ function onLoginResponse() {
             onSiteLoad(user);
         }
     }else if(this.status === INTERNAL_SERVER_ERROR){
-        window.alert("Some requested field is empty");
+        onOtherResponse(registerButtonDivEl, this)
     }
     else {
         onOtherResponse(loginButtonContentDivEl, this);

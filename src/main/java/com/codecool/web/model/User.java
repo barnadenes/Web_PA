@@ -35,16 +35,6 @@ public final class User extends AbstractModel {
         return password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        User user = (User) o;
-        return Objects.equals(email, user.email) &&
-            Objects.equals(password, user.password);
-    }
-
     public String getName() {
         return name;
     }
@@ -73,13 +63,13 @@ public final class User extends AbstractModel {
         return status;
     }
 
-    public int setMoney(int money) {
-        this.money = money;
-        return money;
-    }
-
-    public boolean setStatus(boolean status) {
-        this.status = status;
-        return status;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email) &&
+            Objects.equals(password, user.password);
     }
 }

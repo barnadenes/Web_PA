@@ -11,7 +11,9 @@ public interface UserService {
 
     User findUserById(int id) throws SQLException, ServiceException;
 
-    User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException;
+    User findByEmail(String email) throws SQLException, ServiceException;
 
-    void updateUser(User user) throws SQLException;
+    User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException, ServiceException;
+
+    User updateUser(int id, String email, String name, String country, String city, String street, String zip, String money) throws SQLException, ServiceException;
 }

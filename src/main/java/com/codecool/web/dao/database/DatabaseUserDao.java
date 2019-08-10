@@ -69,16 +69,17 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public void updateUser(User user) throws SQLException {
-        String sql = "UPDATE users SET (email, name, country, city, street, zip_code, money, status) = (?, ?, ?, ?, ?, ?, ?) WHERE user_id = ?";
+    public void updateUser(int id, String email, String name, String country, String city, String street, String zip, int money) throws SQLException {
+        String sql = "UPDATE users SET (email, name, country, city, street, zip_code, money) = (?, ?, ?, ?, ?, ?, ?) WHERE user_id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getName());
-            ps.setString(3, user.getCountry());
-            ps.setString(4, user.getCity());
-            ps.setString(5, user.getStreet());
-            ps.setString(6, user.getZipcode());
-            ps.setInt(7, user.getMoney());
+            ps.setString(1, email);
+            ps.setString(2, name);
+            ps.setString(3, country);
+            ps.setString(4, city);
+            ps.setString(5, street);
+            ps.setString(6, zip);
+            ps.setInt(7, money);
+            ps.setInt(8, id);
 
             ps.executeUpdate();
         }

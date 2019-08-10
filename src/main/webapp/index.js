@@ -10,6 +10,8 @@ let itemsContentDivEl;
 let logoutButtonContentDivEl;
 let headerContentDivEl;
 let carouselContentDivEl;
+let registerButtonDivEl;
+let userInfoButtonDivEl;
 
 function newInfo(targetEl, message) {
     newMessage(targetEl, 'info', message);
@@ -102,9 +104,11 @@ function onLoad() {
     carouselContentDivEl = document.getElementById('carousel');
     itemsContentDivEl = document.getElementById('shop-body');
     loginButtonContentDivEl = document.getElementById('login-button');
+    userInfoButtonDivEl = document.getElementById('update-user');
+    registerButtonDivEl = document.getElementById('register-button');
 
-    const registerButtonEl = document.getElementById('register-button');
-    registerButtonEl.addEventListener('click', onRegisterButtonClicked);
+    userInfoButtonDivEl.addEventListener('click', onUIUpdateButtonClicked);
+    registerButtonDivEl.addEventListener('click', onRegisterButtonClicked);
 
     const loginButtonEl = document.getElementById('login-button');
     loginButtonEl.addEventListener('click', onLoginButtonClicked);
