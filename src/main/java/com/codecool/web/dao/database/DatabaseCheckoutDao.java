@@ -83,12 +83,7 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
             ps.setInt(1, userId);
             ps.setInt(2, checkoutId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                return true;
-            }
-            else {
-                return false;
-            }
+            return rs.next();
         }
     }
 

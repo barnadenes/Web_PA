@@ -1,4 +1,5 @@
 function createItemView(item) {
+    clearMessages();
     const bodyEl = document.getElementById('item-view-body');
     const brEl = document.createElement('br');
     removeAllChildren(bodyEl);
@@ -31,7 +32,7 @@ function createItemView(item) {
     const priceEl = document.createElement('p');
     const serverSidePrice = item.price;
     priceEl.innerHTML ='Price: ' + serverSidePrice + ' USD';
-    priceEl.style.cursor = 'hover';
+    priceEl.style.cursor = 'pointer';
     priceEl.setAttribute('class', 'item-price');
     priceEl.setAttribute('id', 'USD');
     priceEl.setAttribute('title', 'Convert to HUF');
@@ -50,13 +51,14 @@ function createItemView(item) {
 
     const addButtonEl = document.createElement('button');
     addButtonEl.innerHTML = '<b>ADD TO CART</b>';
-    addButtonEl.setAttribute('id', item.id);
+    addButtonEl.dataset.itemId = item.id;
+    addButtonEl.setAttribute('name', 'buy-button');
+    addButtonEl.addEventListener('click', onAddCartClicked);
     itemContainerEl.appendChild(addButtonEl);
     itemContainerEl.appendChild(brEl);
 
     const backButtonEl = document.createElement('button');
     backButtonEl.setAttribute('id', 'back-button');
-    backButtonEl.setAttribute('class', 'back-button');
     backButtonEl.innerHTML = '<b>Back</b>';
     backButtonEl.addEventListener('click', onBackButtonClicked);
     itemContainerEl.appendChild(backButtonEl);
@@ -90,4 +92,24 @@ function onItemClicked() {
     xhr.addEventListener('error', onNetworkError);
     xhr.open('GET', 'item?' + params);
     xhr.send();
+}
+
+function onAddCartClicked() {
+    const itemId = this.dataset.itemId;
+
+    const params = new URLSearchParams();
+    params.append('item_id', itemId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAddCartResponse);
+    xhr.open('POST', 'cart?' + params.toString());
+    xhr.send();
+}
+
+function onAddCartResponse() {
+    if(this.status === OK) {
+        newMessage(responseButtonEl, 'info', 'Item has been Added to your Cart!');
+    }
+    else
+        onOtherResponse(responseButtonEl, this);
 }

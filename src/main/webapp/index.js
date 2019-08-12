@@ -14,6 +14,7 @@ let headerContentDivEl;
 let carouselContentDivEl;
 let registerButtonDivEl;
 let userInfoButtonDivEl;
+let responseButtonEl;
 
 function newInfo(targetEl, message) {
     newMessage(targetEl, 'info', message);
@@ -31,7 +32,7 @@ function newMessage(targetEl, cssClass, message) {
     pEl.classList.add(cssClass);
     pEl.textContent = message;
 
-    targetEl.appendChild(pEl);
+    targetEl.append(pEl);
 }
 
 function clearMessages() {
@@ -110,6 +111,7 @@ function onLoad() {
     loginButtonContentDivEl = document.getElementById('login-button');
     userInfoButtonDivEl = document.getElementById('update-user');
     registerButtonDivEl = document.getElementById('register-button');
+    responseButtonEl =  document.getElementById('buy-button');
 
     userInfoButtonDivEl.addEventListener('click', onUIUpdateButtonClicked);
     registerButtonDivEl.addEventListener('click', onRegisterButtonClicked);

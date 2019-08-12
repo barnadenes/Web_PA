@@ -49,9 +49,6 @@ INSERT INTO users (email, password, name, country, city, street, zip_code, money
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
     ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
 
-INSERT INTO checkout (book_title, buyer, price) VALUES
-('Dr Stone', 'user1@user1', 10),
-('Something', 'user1@user1', 10);
 
 INSERT INTO items (title, author, url, plot, price) VALUES
 	('Dr. Stone', 'Riichiro Inagaki', 'https://i.redd.it/dqpph2imkoe31.jpg', 'One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he''s got a grand plan in mind—to kickstart civilization with the power of science!', 10),

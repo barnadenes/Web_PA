@@ -26,6 +26,7 @@ function createCartHead() {
 }
 
 function createCartBody(cartContent) {
+    clearMessages();
     checkoutContentDivEl.append(createCartHead());
 
     for(let i = 0; i < cartContent.length; i++) {

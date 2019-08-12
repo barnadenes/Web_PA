@@ -17,7 +17,6 @@ function createItemsTable(items) {
         const divEl = document.createElement('div');
         const pictureEl = item.url;
         divEl.setAttribute('class', 'shop-head');
-        divEl.setAttribute('id', item.id);
         divEl.dataset.itemId = item.id;
         divEl.style.backgroundImage = 'url(' + pictureEl + ')';
         divEl.addEventListener('click', onItemClicked);

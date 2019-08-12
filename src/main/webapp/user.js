@@ -1,4 +1,6 @@
 function onUserInfoButtonClicked() {
+    clearMessages();
+
     showContents(['site-header', 'carousel', 'user-info-body']);
     const user = getAuthorization();
     const userFormEl = document.forms['user-form'];
@@ -22,7 +24,7 @@ function onUserInfoButtonClicked() {
     zip.value = user.zipcode;
 
     const money = userFormEl.querySelector('input[name="money"]');
-    money.value = user.money + '$';
+    money.value = user.money;
 }
 
 function onUIUpdateButtonClicked() {
