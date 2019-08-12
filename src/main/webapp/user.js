@@ -22,7 +22,7 @@ function onUserInfoButtonClicked() {
     zip.value = user.zipcode;
 
     const money = userFormEl.querySelector('input[name="money"]');
-    money.value = user.money;
+    money.value = user.money + '$';
 }
 
 function onUIUpdateButtonClicked() {

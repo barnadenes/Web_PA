@@ -4,6 +4,7 @@ import com.codecool.web.dao.ItemsDao;
 import com.codecool.web.model.ShopItem;
 import com.codecool.web.model.ShopItems;
 import com.codecool.web.service.ItemsService;
+import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,8 +23,14 @@ public final class SimpleItemsService implements ItemsService {
     }
 
     @Override
-    public ShopItems findItemById(int id) throws SQLException {
-        return null;
+    public ShopItems findItemById(String id) throws SQLException, ServiceException {
+        try{
+            return itemsDao.findItemById(Integer.valueOf(id));
+        }
+        catch (NumberFormatException e) {
+            throw new ServiceException(e.getMessage() + "Item id should be an Integer!");
+        }
+
     }
 
     @Override

@@ -7,6 +7,7 @@ const INTERNAL_SERVER_ERROR = 500;
 let loginContentDivEl;
 let loginButtonContentDivEl;
 let itemsContentDivEl;
+let itemContentDivEl;
 let logoutButtonContentDivEl;
 let headerContentDivEl;
 let carouselContentDivEl;
@@ -103,6 +104,7 @@ function onLoad() {
     headerContentDivEl = document.getElementById('site-header');
     carouselContentDivEl = document.getElementById('carousel');
     itemsContentDivEl = document.getElementById('shop-body');
+    itemContentDivEl = document.getElementById('item-view-body');
     loginButtonContentDivEl = document.getElementById('login-button');
     userInfoButtonDivEl = document.getElementById('update-user');
     registerButtonDivEl = document.getElementById('register-button');
@@ -125,11 +127,8 @@ function onLoad() {
     const checkoutButtonEl = document.getElementById('nav-checkout-button');
     checkoutButtonEl.addEventListener('click', onCheckoutButtonClicked);
 
-    // const tempEl = document.getElementById('1');
-    // tempEl.addEventListener('click', onItemClicked);
-
-    const backButtonEl = document.getElementById('back-button');
-    backButtonEl.addEventListener('click', onBackButtonClicked);
+    // const backButtonEl = document.getElementById('back-button');
+    // backButtonEl.addEventListener('click', onBackButtonClicked);
 
     // const addItemButtonEl = document.getElementById('nav-add-button');
     // addItemButtonEl.addEventListener('click', onAddItemButtonClicked);

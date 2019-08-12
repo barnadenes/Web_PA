@@ -117,17 +117,6 @@
     </div>
 
     <div id="item-view-body" class="item-view-body hidden content">
-        <div class="item-view">
-            <img src="img/kep.jpg">
-        </div>
-        <div class="item-view">
-            <p><strong>Title:</strong> Khajiit likes to sneak</p>
-            <p><strong>Author:</strong> Luna-Tyk Cats</p>
-            <p><strong>Plot:</strong> Dragons return to Tamriel in The Elder Scrolls Online: Elsweyr, part of the Season of the Dragon year-long adventure! Explore sun-blessed savannahs and canyons, defend the Khajiiti homeland, and command the merciless undead with the Necromancer class in this all-new Chapter of The Elder Scrolls Online saga!</p><br>
-            <p class="item-price">Price: 10 EUR</p>
-            <button><b>ADD TO CART</b></button><br>
-            <button id="back-button" class="back-button"><b>Back</b></button>
-        </div>
     </div>
 
     <div id="checkout-body" class="checkout-body hidden content">
