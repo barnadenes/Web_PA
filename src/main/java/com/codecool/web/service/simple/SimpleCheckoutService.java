@@ -3,6 +3,7 @@ package com.codecool.web.service.simple;
 import com.codecool.web.dao.CheckoutDao;
 import com.codecool.web.model.Checkout;
 import com.codecool.web.service.CheckoutService;
+import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,31 +18,36 @@ public final class SimpleCheckoutService implements CheckoutService {
 
     @Override
     public void addToCart(Checkout item) throws SQLException {
-
+        checkoutDao.addToCart(item);
     }
 
     @Override
-    public List<Checkout> findAllCheckout() throws SQLException {
-        return null;
+    public List<Checkout> findAllCheckout() throws SQLException, ServiceException {
+        return checkoutDao.findAllCheckout();
     }
 
     @Override
-    public List<Checkout> findCheckoutByUser(int userId) throws SQLException {
-        return null;
+    public List<Checkout> findCheckoutByUser(int userId) throws SQLException, ServiceException {
+        List<Checkout> list = checkoutDao.findCheckoutByUser(userId);
+
+        if(list.isEmpty()) {
+            throw new ServiceException("Your Cart is Empty!");
+        }
+        return list;
     }
 
     @Override
     public void deleteCheckout(int userId, int checkoutId) throws SQLException {
-
+        checkoutDao.deleteCheckout(userId, checkoutId);
     }
 
     @Override
     public void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException {
-
+        checkoutDao.addToUserCheckoutTable(userId, checkoutId);
     }
 
     @Override
     public boolean inCart(int userId, int checkoutId) throws SQLException {
-        return false;
+        return checkoutDao.inCart(userId, checkoutId);
     }
 }

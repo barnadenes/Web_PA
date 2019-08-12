@@ -1,5 +1,5 @@
 function onShopButtonClicked() {
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(itemContentDivEl);
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onItemsResponse);

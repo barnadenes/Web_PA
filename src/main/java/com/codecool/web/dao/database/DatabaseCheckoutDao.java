@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
 
-    DatabaseCheckoutDao(Connection connection) {
+    public DatabaseCheckoutDao(Connection connection) {
         super(connection);
     }
 

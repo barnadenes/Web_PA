@@ -25,6 +25,7 @@ function createItemView(item) {
 
     const plotEl = document.createElement('p');
     plotEl.innerHTML =`<strong>Plot: </strong>${item.plot}`;
+    itemContainerEl.appendChild(brEl);
     itemContainerEl.appendChild(plotEl);
 
     const priceEl = document.createElement('p');
