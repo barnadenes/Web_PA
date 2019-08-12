@@ -24,7 +24,7 @@ function createItemView(item) {
     itemContainerEl.appendChild(authorEl);
 
     const plotEl = document.createElement('p');
-    plotEl.innerHTML =`<strong>Author: </strong>${item.plot}`;
+    plotEl.innerHTML =`<strong>Plot: </strong>${item.plot}`;
     itemContainerEl.appendChild(plotEl);
 
     const priceEl = document.createElement('p');
