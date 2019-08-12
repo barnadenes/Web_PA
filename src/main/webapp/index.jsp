@@ -120,29 +120,6 @@
     </div>
 
     <div id="checkout-body" class="checkout-body hidden content">
-        <h1 class="checkout-h1">Checkout</h1>
-        <div class="checkout-item">
-            <button class="cancel-order-button">X</button>
-            <p><b>Title: </b>Harry Potter</p>
-            <p><b>Buyer: </b>Nyukk</p>
-            <p><b>Price: </b>20$</p>
-        </div>
-        <div class="checkout-item">
-            <button class="cancel-order-button">X</button>
-            <p><b>Title: </b>Log Horizon</p>
-            <p><b>Buyer: </b>Yorui</p>
-            <p><b>Price: </b>10$</p>
-        </div>
-        <div class="checkout-item">
-            <button class="cancel-order-button">X</button>
-            <p><b>Title: </b>Kimi no Koe</p>
-            <p><b>Buyer: </b>Polnareff</p>
-            <p><b>Price: </b>10$</p>
-        </div>
-        <div class="checkout-footer">
-            <p class="checkout-price"><b>Total Price: </b></p>
-            <button class="buy-order-button">Order</button>
-        </div>
     </div>
 
     <div id="admin-add" class="hidden content">
