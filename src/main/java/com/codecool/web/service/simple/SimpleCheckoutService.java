@@ -17,8 +17,14 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void addToCart(Checkout item) throws SQLException {
-        checkoutDao.addToCart(item);
+    public void addToCart(String title, String buyer, int price, int userId, int checkoutId) throws SQLException, ServiceException {
+        if(!inCart(userId, checkoutId)) {
+            checkoutDao.addToCart(title, buyer, price);
+        }
+        else {
+            throw new ServiceException("Already Purchased! / In Cart!");
+    }
+
     }
 
     @Override
@@ -42,14 +48,8 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException, ServiceException {
-        if(inCart(userId, checkoutId)) {
-            checkoutDao.addToUserCheckoutTable(userId, checkoutId);
-        }
-        else {
-            throw new ServiceException("Already Purchased! / In Cart!");
-        }
-
+    public void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException {
+        checkoutDao.addToUserCheckoutTable(userId, checkoutId);
     }
 
     @Override

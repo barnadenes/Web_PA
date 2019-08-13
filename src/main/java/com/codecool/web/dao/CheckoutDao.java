@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CheckoutDao {
 
-    void addToCart(Checkout item) throws SQLException;
+    void addToCart(String title, String buyer, int price) throws SQLException;
 
     List<Checkout> findAllCheckout() throws SQLException;
 

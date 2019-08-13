@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CheckoutService {
 
-    void addToCart(Checkout item) throws SQLException;
+    void addToCart(String title, String buyer, int price, int userId, int checkoutId) throws SQLException, ServiceException;
 
     List<Checkout> findAllCheckout() throws SQLException, ServiceException;
 
@@ -16,7 +16,7 @@ public interface CheckoutService {
 
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 
-    void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException, ServiceException;
+    void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException;
 
     boolean inCart(int userId, int checkoutId) throws SQLException;
 }

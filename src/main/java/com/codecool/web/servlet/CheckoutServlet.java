@@ -58,11 +58,14 @@ public class CheckoutServlet extends AbstractServlet{
             String buyer = user.getEmail();
             int price = shopItems.getPrice();
 
+            checkoutService.addToCart(title, buyer, price, userId, Integer.parseInt(itemId));
             checkoutService.addToUserCheckoutTable(userId, Integer.valueOf(itemId));
-            checkoutService.addToCart(new Checkout(Integer.valueOf(itemId), title, buyer, price));
+
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");
-        } catch (SQLException | ServiceException e) {
+        } catch (SQLException e) {
+            handleSqlError(resp, e);
+        } catch (ServiceException e) {
             sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
         }
     }

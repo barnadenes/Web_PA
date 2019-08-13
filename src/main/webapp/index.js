@@ -14,7 +14,7 @@ let headerContentDivEl;
 let carouselContentDivEl;
 let registerButtonDivEl;
 let userInfoButtonDivEl;
-let responseButtonEl;
+let itemViewDivEl;
 
 function newInfo(targetEl, message) {
     newMessage(targetEl, 'info', message);
@@ -111,7 +111,6 @@ function onLoad() {
     loginButtonContentDivEl = document.getElementById('login-button');
     userInfoButtonDivEl = document.getElementById('update-user');
     registerButtonDivEl = document.getElementById('register-button');
-    responseButtonEl =  document.getElementById('buy-button');
 
     userInfoButtonDivEl.addEventListener('click', onUIUpdateButtonClicked);
     registerButtonDivEl.addEventListener('click', onRegisterButtonClicked);

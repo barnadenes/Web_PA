@@ -52,7 +52,7 @@ function createItemView(item) {
     const addButtonEl = document.createElement('button');
     addButtonEl.innerHTML = '<b>ADD TO CART</b>';
     addButtonEl.dataset.itemId = item.id;
-    addButtonEl.setAttribute('name', 'buy-button');
+    addButtonEl.setAttribute('id', 'buy-button');
     addButtonEl.addEventListener('click', onAddCartClicked);
     itemContainerEl.appendChild(addButtonEl);
     itemContainerEl.appendChild(brEl);
@@ -102,14 +102,16 @@ function onAddCartClicked() {
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAddCartResponse);
+    xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'cart?' + params.toString());
     xhr.send();
 }
 
 function onAddCartResponse() {
     if(this.status === OK) {
-        newMessage(responseButtonEl, 'info', 'Item has been Added to your Cart!');
+        newMessage(itemContentDivEl, 'info', 'Item has been Added to your Cart!');
     }
     else
-        onOtherResponse(responseButtonEl, this);
+        onOtherResponse(itemContentDivEl, this);
 }
+
