@@ -1,4 +1,5 @@
 function createItemView(item) {
+    removeAllChildren(itemsContentDivEl);
     clearMessages();
     const bodyEl = document.getElementById('item-view-body');
     const brEl = document.createElement('br');

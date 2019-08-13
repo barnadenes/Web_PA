@@ -43,6 +43,18 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
+    public Checkout findCheckoutById(int checkoutId) throws SQLException, ServiceException {
+        Checkout checkout = checkoutDao.findCheckoutById(checkoutId);
+
+        if(checkout != null) {
+            return  checkout;
+        }
+        else {
+            throw new ServiceException("Item was not Found!");
+        }
+    }
+
+    @Override
     public void deleteCheckout(int userId, int checkoutId) throws SQLException {
         checkoutDao.deleteCheckout(userId, checkoutId);
     }

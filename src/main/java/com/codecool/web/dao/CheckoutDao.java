@@ -13,6 +13,8 @@ public interface CheckoutDao {
 
     List<Checkout> findCheckoutByUser(int userId) throws SQLException;
 
+    Checkout findCheckoutById(int checkout_id) throws SQLException;
+
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 
     void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException;

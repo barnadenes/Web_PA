@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS user_checkout_table CASCADE ;
 DROP TABLE IF EXISTS checkout CASCADE ;
 DROP TABLE IF EXISTS users CASCADE ;
 DROP TABLE IF EXISTS items CASCADE ;
+DROP TABLE IF EXISTS orders;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -23,6 +24,13 @@ CREATE TABLE users (
 
 CREATE TABLE checkout (
     checkout_id INTEGER PRIMARY KEY,
+    book_title TEXT NOT NULL,
+    buyer TEXT NOT NULL,
+    price INTEGER NOT NULL
+);
+
+CREATE TABLE orders (
+    order_id SERIAL,
     book_title TEXT NOT NULL,
     buyer TEXT NOT NULL,
     price INTEGER NOT NULL

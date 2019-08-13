@@ -34,8 +34,10 @@ public class CheckoutServlet extends AbstractServlet{
             List<Checkout> cart = checkoutService.findCheckoutByUser(user.getId());
 
             sendMessage(resp, HttpServletResponse.SC_OK, cart);
-        } catch (SQLException | ServiceException e) {
-            sendMessage(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e);
+        } catch (SQLException e) {
+            handleSqlError(resp, e);
+        } catch (ServiceException e) {
+            sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
         }
     }
 
