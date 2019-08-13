@@ -19,7 +19,7 @@ public final class SimpleCheckoutService implements CheckoutService {
     @Override
     public void addToCart(String title, String buyer, int price, int userId, int checkoutId) throws SQLException, ServiceException {
         if(!inCart(userId, checkoutId)) {
-            checkoutDao.addToCart(title, buyer, price);
+            checkoutDao.addToCart(checkoutId, title, buyer, price);
         }
         else {
             throw new ServiceException("Already Purchased! / In Cart!");

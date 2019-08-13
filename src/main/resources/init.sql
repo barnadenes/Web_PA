@@ -22,11 +22,10 @@ CREATE TABLE users (
 );
 
 CREATE TABLE checkout (
-    checkout_id SERIAL PRIMARY KEY,
+    checkout_id INTEGER PRIMARY KEY,
     book_title TEXT NOT NULL,
     buyer TEXT NOT NULL,
-    price INTEGER NOT NULL,
-    FOREIGN KEY (checkout_id) REFERENCES users(user_id)
+    price INTEGER NOT NULL
 );
 
 CREATE TABLE items (

@@ -14,16 +14,17 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
-    public void addToCart(String title, String buyer, int price) throws SQLException {
+    public void addToCart(int id, String title, String buyer, int price) throws SQLException {
         boolean autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "INSERT INTO checkout (book_title, buyer, price) " +
-            "VALUES(?, ?, ?)";
+        String sql = "INSERT INTO checkout (checkout_id, book_title, buyer, price) " +
+            "VALUES(?, ?, ?, ?)";
 
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, title);
-            ps.setString(2, buyer);
-            ps.setInt(3, price);
+            ps.setInt(1, id);
+            ps.setString(2, title);
+            ps.setString(3, buyer);
+            ps.setInt(4, price);
             executeInsert(ps);
             connection.commit();
         } catch (SQLException e) {

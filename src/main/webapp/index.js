@@ -14,7 +14,6 @@ let headerContentDivEl;
 let carouselContentDivEl;
 let registerButtonDivEl;
 let userInfoButtonDivEl;
-let itemViewDivEl;
 
 function newInfo(targetEl, message) {
     newMessage(targetEl, 'info', message);
