@@ -6,6 +6,9 @@ function onCheckoutButtonClicked() {
 }
 
 function onCheckoutResponse() {
+    removeAllChildren(checkoutContentDivEl);
+    removeAllChildren(itemContentDivEl);
+    removeAllChildren(itemsContentDivEl);
     if(this.status === OK) {
         const cartItems = JSON.parse(this.responseText);
         createCartBody(cartItems);
@@ -37,7 +40,9 @@ function createCartBody(cartContent) {
 
         const deleteButtonEl = document.createElement('button');
         deleteButtonEl.setAttribute('class', 'cancel-order-button');
+        deleteButtonEl.dataset.deleteId = item.id;
         deleteButtonEl.textContent = 'X';
+        deleteButtonEl.addEventListener('click', onDeleteButtonClicked);
         itemDivEl.appendChild(deleteButtonEl);
 
         const titleEl = document.createElement('p');
@@ -51,6 +56,13 @@ function createCartBody(cartContent) {
         const priceEl = document.createElement('p');
         priceEl.innerHTML = `<b>Price: </b> ${item.price}`;
         itemDivEl.appendChild(priceEl);
+
+        const buyOrderButtonEl = document.createElement('button');
+        buyOrderButtonEl.setAttribute('class', 'buy-order-button');
+        buyOrderButtonEl.textContent = 'Order';
+        buyOrderButtonEl.dataset.orderId = item.id;
+        buyOrderButtonEl.addEventListener('click', onBuyOrderClicked);
+        itemDivEl.appendChild(buyOrderButtonEl);
 
         checkoutContentDivEl.appendChild(itemDivEl);
     }
@@ -69,12 +81,51 @@ function createCartFooter(cartContent) {
     userMoneyEl.innerHTML = '<b>Money: </b>' + getMoneyFromLocalStorage() + ' USD';
     footerDivEl.appendChild(userMoneyEl);
 
-    const buyOrderButtonEl = document.createElement('button');
-    buyOrderButtonEl.setAttribute('class', 'buy-order-button');
-    buyOrderButtonEl.textContent = 'Order';
-    footerDivEl.appendChild(buyOrderButtonEl);
-
     return footerDivEl;
+}
+
+function onDeleteButtonClicked() {
+    const deleteButtonId = this.dataset.deleteId;
+
+    const param = new URLSearchParams();
+    param.append('delete_id', deleteButtonId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onDeleteButtonResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('DELETE', 'cart?' + param);
+    xhr.send();
+}
+
+
+function onDeleteButtonResponse() {
+    if(this.status === OK ){
+        newMessage(checkoutContentDivEl, 'info', 'Item removed');
+    } else {
+        onOtherResponse(checkoutContentDivEl ,this);
+    }
+}
+
+function onBuyOrderClicked() {
+    const buyOrderId = this.dataset.orderId;
+
+    const param = new URLSearchParams();
+    param.append('item_id' ,buyOrderId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onBuyOrderResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'orders?' + param);
+    xhr.send();
+}
+
+function onBuyOrderResponse() {
+    if(this.status === OK) {
+        newMessage(checkoutContentDivEl, 'info', 'Purchase Complete!');
+    }
+    else {
+        onOtherResponse(checkoutContentDivEl, this);
+    }
 }
 
 function getMoneyFromLocalStorage() {
@@ -93,11 +144,8 @@ function getOrderPrice(cartContent) {
 
 function emptyCartResponse() {
     const errorDivEl = document.createElement('div');
-    errorDivEl.textContent = this;
+    errorDivEl.textContent = 'Empty Cart';
     errorDivEl.setAttribute('class', 'error');
     errorDivEl.style.fontWeight = '900';
     checkoutContentDivEl.appendChild(errorDivEl);
 }
-
-
-

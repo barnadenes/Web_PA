@@ -49,12 +49,12 @@ public class OrderServlet extends AbstractServlet{
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
 
-            String checkout_id = req.getParameter("checkout_id");
+            String checkout_id = req.getParameter("item_id");
             Checkout item = checkoutService.findCheckoutById(Integer.parseInt(checkout_id));
 
             orderService.addToOrders(item.getBookTitle(), item.getBuyer(), item.getPrice());
 
-            sendMessage(resp, HttpServletResponse.SC_OK, "Order has been Completed!");
+            sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {

@@ -73,7 +73,18 @@ public class CheckoutServlet extends AbstractServlet{
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {Connection connection = getConnection(req.getServletContext());
+            CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
+            CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
+            User user = (User) req.getSession().getAttribute("user");
+            String itemId = req.getParameter("delete_id");
+
+            checkoutService.deleteCheckout(user.getId(), Integer.parseInt(itemId));
+
+            sendMessage(resp, HttpServletResponse.SC_OK, "");
+        } catch (SQLException e) {
+            handleSqlError(resp, e);
+        }
     }
 }

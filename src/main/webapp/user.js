@@ -55,6 +55,10 @@ function onUIUpdateButtonClicked() {
 }
 
 function onUserResponse() {
+    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(itemContentDivEl);
+    removeAllChildren(checkoutContentDivEl);
+
     if (this.status === OK) {
         setUnauthorized();
 
