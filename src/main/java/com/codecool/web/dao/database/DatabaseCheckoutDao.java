@@ -91,6 +91,16 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
+    public void deleteCheckoutMain(int checkoutId) throws SQLException {
+        String sql = "DELETE FROM checkout WHERE checkout_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, checkoutId);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
     public boolean inCart(int userId, int checkoutId) throws SQLException {
         String sql =  "SELECT * FROM user_checkout_table WHERE user_id = ? AND checkout_id = ?";
 

@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS user_checkout_table CASCADE ;
 DROP TABLE IF EXISTS checkout CASCADE ;
 DROP TABLE IF EXISTS users CASCADE ;
 DROP TABLE IF EXISTS items CASCADE ;
-DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS orders CASCADE ;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -48,14 +48,26 @@ CREATE TABLE items (
 CREATE TABLE user_checkout_table (
     user_id INTEGER,
     checkout_id INTEGER,
+    PRIMARY KEY (user_id, checkout_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id)
 );
+
+INSERT INTO checkout (checkout_id, book_title, buyer, price) VALUES
+    (1, 'LOL', 'user1@user1', 10),
+    (2, 'adfadf', 'user1@user1', 18),
+    (3, 'adsfgaggggvvv', 'user1@user1', 5),
+    (4, 'LliuztfOL', 'user1@user1', 30);
 
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
     ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
 
+INSERT INTO user_checkout_table (user_id, checkout_id) VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4);
 
 INSERT INTO items (title, author, url, plot, price) VALUES
 	('Dr. Stone', 'Riichiro Inagaki', 'https://i.redd.it/dqpph2imkoe31.jpg', 'One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he''s got a grand plan in mind—to kickstart civilization with the power of science!', 10),

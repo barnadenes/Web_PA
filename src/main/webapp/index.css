@@ -205,12 +205,12 @@ body {
 .checkout-body {
     height: 100%;
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 40px;
     overflow: hidden;
     width: 80%;
     margin: 0 auto;
     grid-template-columns: repeat(1, 0.8fr);
-    grid-auto-rows: 110px;
+    grid-auto-rows: 140px;
     justify-content: center;
     align-content: center;
 }
@@ -235,9 +235,15 @@ body {
 .buy-order-button {
     background: bisque;
     width: 15%;
+    height: 40%;
     cursor: pointer;
     margin-top: 20px;
     border: 2px solid darkgoldenrod;
+}
+
+.buy-order-button:hover {
+    background: #ffd151;
+    font-weight: 900;
 }
 
 .cancel-order-button{

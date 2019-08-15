@@ -57,6 +57,12 @@ public final class SimpleCheckoutService implements CheckoutService {
     @Override
     public void deleteCheckout(int userId, int checkoutId) throws SQLException {
         checkoutDao.deleteCheckout(userId, checkoutId);
+        deleteMainCheckout(checkoutId);
+    }
+
+    @Override
+    public void deleteMainCheckout(int checkoutId) throws SQLException {
+        checkoutDao.deleteCheckoutMain(checkoutId);
     }
 
     @Override

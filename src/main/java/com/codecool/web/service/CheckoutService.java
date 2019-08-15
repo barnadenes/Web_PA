@@ -18,6 +18,8 @@ public interface CheckoutService {
 
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 
+    void deleteMainCheckout(int checkoutId) throws SQLException;
+
     void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException;
 
     boolean inCart(int userId, int checkoutId) throws SQLException;

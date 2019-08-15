@@ -17,6 +17,8 @@ public interface CheckoutDao {
 
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 
+    void deleteCheckoutMain(int checkoutId) throws SQLException;
+
     void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException;
 
     boolean inCart(int userId, int checkoutId) throws SQLException;

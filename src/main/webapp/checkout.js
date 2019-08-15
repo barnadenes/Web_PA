@@ -42,6 +42,7 @@ function createCartBody(cartContent) {
         deleteButtonEl.setAttribute('class', 'cancel-order-button');
         deleteButtonEl.dataset.deleteId = item.id;
         deleteButtonEl.textContent = 'X';
+        deleteButtonEl.title = 'Cancel Order';
         deleteButtonEl.addEventListener('click', onDeleteButtonClicked);
         itemDivEl.appendChild(deleteButtonEl);
 
@@ -97,10 +98,12 @@ function onDeleteButtonClicked() {
     xhr.send();
 }
 
-
 function onDeleteButtonResponse() {
     if(this.status === OK ){
-        newMessage(checkoutContentDivEl, 'info', 'Item removed');
+        onCheckoutButtonClicked();
+        setTimeout(function(){
+            newMessage(checkoutContentDivEl, 'info', 'Item removed');
+        }, 1000);
     } else {
         onOtherResponse(checkoutContentDivEl ,this);
     }
