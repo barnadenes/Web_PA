@@ -17,7 +17,6 @@ import com.codecool.web.service.simple.SimpleCheckoutService;
 import com.codecool.web.service.simple.SimpleOrderService;
 import com.codecool.web.service.simple.SimpleUserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +29,7 @@ import java.util.List;
 public class OrderServlet extends AbstractServlet{
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {Connection connection = getConnection(req.getServletContext());
             OrderDao orderDao = new DatabaseOrderDao(connection);
             OrderService  orderService = new SimpleOrderService(orderDao);
@@ -57,7 +56,9 @@ public class OrderServlet extends AbstractServlet{
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new SimpleUserService(userDao);
 
-            User user = (User)req.getSession().getAttribute("user");
+            User sessionUser = (User)req.getSession().getAttribute("user");
+            User user = userService.findUserById(sessionUser.getId());
+
             String checkout_id = req.getParameter("item_id");
             Checkout item = checkoutService.findCheckoutById(checkout_id);
 

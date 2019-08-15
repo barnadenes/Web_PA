@@ -13,9 +13,9 @@ function onBuyOrderClicked() {
 
 function onBuyOrderResponse() {
     if(this.status === OK) {
-        newMessage(checkoutContentDivEl, 'info', 'Purchase Complete!');
+        newMessage(carouselContentDivEl, 'info', 'Purchase Complete!');
     }
     else {
-        onOtherResponse(checkoutContentDivEl, this);
+        onOtherResponse(carouselContentDivEl, this);
     }
 }

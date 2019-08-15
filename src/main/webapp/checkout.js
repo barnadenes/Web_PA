@@ -78,10 +78,6 @@ function createCartFooter(cartContent) {
     checkoutPriceEl.innerHTML = '<b>Total Price: </b>' + getOrderPrice(cartContent) + ' USD';
     footerDivEl.appendChild(checkoutPriceEl);
 
-    const userMoneyEl = document.createElement('p');
-    userMoneyEl.innerHTML = '<b>Money: </b>' + getMoneyFromLocalStorage() + ' USD';
-    footerDivEl.appendChild(userMoneyEl);
-
     return footerDivEl;
 }
 
@@ -102,16 +98,11 @@ function onDeleteButtonResponse() {
     if(this.status === OK ){
         onCheckoutButtonClicked();
         setTimeout(function(){
-            newMessage(checkoutContentDivEl, 'info', 'Item removed');
+            newMessage(carouselContentDivEl, 'info', 'Item removed');
         }, 1000);
     } else {
-        onOtherResponse(checkoutContentDivEl ,this);
+        onOtherResponse(carouselContentDivEl ,this);
     }
-}
-
-function getMoneyFromLocalStorage() {
-    const localUserEl = JSON.parse(localStorage.getItem('user'));
-    return localUserEl.money;
 }
 
 function getOrderPrice(cartContent) {

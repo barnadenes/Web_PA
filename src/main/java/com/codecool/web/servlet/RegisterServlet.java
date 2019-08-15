@@ -37,8 +37,10 @@ public class RegisterServlet extends AbstractServlet{
             req.getSession().setAttribute("user", user);
 
             sendMessage(resp, HttpServletResponse.SC_OK, user);
-        } catch (SQLException | ServiceException ex) {
+        } catch (SQLException ex) {
             handleSqlError(resp, ex);
+        } catch (ServiceException e) {
+            sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
         }
     }
 }

@@ -17,14 +17,15 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void addToCart(String title, String buyer, int price, int userId, int checkoutId) throws SQLException, ServiceException {
-        if(!inCart(userId, checkoutId)) {
-            checkoutDao.addToCart(checkoutId, title, buyer, price);
+    public void addToCart(String title, String buyer, int price, int userId, String checkoutId) throws SQLException, ServiceException {
+        int id = Integer.parseInt(checkoutId);
+
+        if(!inCart(userId, id)) {
+            checkoutDao.addToCart(id, title, buyer, price);
         }
         else {
             throw new ServiceException("Already Purchased! / In Cart!");
-    }
-
+        }
     }
 
     @Override
@@ -55,9 +56,11 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void deleteCheckout(int userId, int checkoutId) throws SQLException {
-        checkoutDao.deleteCheckout(userId, checkoutId);
-        deleteMainCheckout(checkoutId);
+    public void deleteCheckout(int userId, String checkoutId) throws SQLException {
+        int checkoutID = Integer.parseInt(checkoutId);
+
+        checkoutDao.deleteCheckout(userId, checkoutID);
+        deleteMainCheckout(checkoutID);
     }
 
     @Override
@@ -66,8 +69,8 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException {
-        checkoutDao.addToUserCheckoutTable(userId, checkoutId);
+    public void addToUserCheckoutTable(int userId, String checkoutId) throws SQLException {
+        checkoutDao.addToUserCheckoutTable(userId, Integer.parseInt(checkoutId));
     }
 
     @Override

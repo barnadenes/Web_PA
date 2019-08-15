@@ -87,7 +87,7 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
 
     @Override
     public void updateUserMoney(int id, int money) throws SQLException {
-        String sql = "UPDATE users SET (money) = (?) WHERE user_id = ?";
+        String sql = "UPDATE users SET money = ? WHERE user_id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, money);
             ps.setInt(2, id);

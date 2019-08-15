@@ -59,8 +59,8 @@ public class CheckoutServlet extends AbstractServlet{
             String buyer = user.getEmail();
             int price = shopItems.getPrice();
 
-            checkoutService.addToCart(title, buyer, price, userId, Integer.parseInt(itemId));
-            checkoutService.addToUserCheckoutTable(userId, Integer.valueOf(itemId));
+            checkoutService.addToCart(title, buyer, price, userId, itemId);
+            checkoutService.addToUserCheckoutTable(userId, itemId);
 
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");
@@ -76,10 +76,11 @@ public class CheckoutServlet extends AbstractServlet{
         try {Connection connection = getConnection(req.getServletContext());
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
+
             User user = (User) req.getSession().getAttribute("user");
             String itemId = req.getParameter("delete_id");
 
-            checkoutService.deleteCheckout(user.getId(), Integer.parseInt(itemId));
+            checkoutService.deleteCheckout(user.getId(), itemId);
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
