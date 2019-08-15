@@ -2,15 +2,20 @@ package com.codecool.web.servlet;
 
 import com.codecool.web.dao.CheckoutDao;
 import com.codecool.web.dao.OrderDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.dao.database.DatabaseCheckoutDao;
 import com.codecool.web.dao.database.DatabaseOrderDao;
+import com.codecool.web.dao.database.DatabaseUserDao;
 import com.codecool.web.model.Checkout;
 import com.codecool.web.model.Order;
+import com.codecool.web.model.User;
 import com.codecool.web.service.CheckoutService;
 import com.codecool.web.service.OrderService;
+import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleCheckoutService;
 import com.codecool.web.service.simple.SimpleOrderService;
+import com.codecool.web.service.simple.SimpleUserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,9 +54,14 @@ public class OrderServlet extends AbstractServlet{
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
 
-            String checkout_id = req.getParameter("item_id");
-            Checkout item = checkoutService.findCheckoutById(Integer.parseInt(checkout_id));
+            UserDao userDao = new DatabaseUserDao(connection);
+            UserService userService = new SimpleUserService(userDao);
 
+            User user = (User)req.getSession().getAttribute("user");
+            String checkout_id = req.getParameter("item_id");
+            Checkout item = checkoutService.findCheckoutById(checkout_id);
+
+            userService.updateUserMoney(user, item);
             orderService.addToOrders(item.getBookTitle(), item.getBuyer(), item.getPrice());
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");

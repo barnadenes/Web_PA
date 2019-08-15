@@ -43,11 +43,11 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public Checkout findCheckoutById(int checkoutId) throws SQLException, ServiceException {
-        Checkout checkout = checkoutDao.findCheckoutById(checkoutId);
+    public Checkout findCheckoutById(String checkoutId) throws SQLException, ServiceException {
+        Checkout checkout = checkoutDao.findCheckoutById(Integer.parseInt(checkoutId));
 
         if(checkout != null) {
-            return  checkout;
+            return checkout;
         }
         else {
             throw new ServiceException("Item was not Found!");

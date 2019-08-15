@@ -13,7 +13,6 @@ import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleCheckoutService;
 import com.codecool.web.service.simple.SimpleItemsService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -22,6 +22,7 @@
     <c:url value="/user.js" var="userScriptUrl"/>
     <c:url value="/items.js" var="itemsScriptUrl"/>
     <c:url value="/item.js" var="itemScriptUrl"/>
+    <c:url value="/order.js" var="orderScriptUrl"/>
     <c:url value="/checkout.js" var="checkoutScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/register.js" var="registerScriptUrl"/>
@@ -34,6 +35,7 @@
     <script src="${userScriptUrl}"></script>
     <script src="${itemsScriptUrl}"></script>
     <script src="${itemScriptUrl}"></script>
+    <script src="${orderScriptUrl}"></script>
     <script src="${checkoutScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
     <script src="${registerScriptUrl}"></script>

@@ -14,7 +14,7 @@ public interface CheckoutService {
 
     List<Checkout> findCheckoutByUser(int userId) throws SQLException, ServiceException;
 
-    Checkout findCheckoutById(int checkoutId) throws SQLException, ServiceException;
+    Checkout findCheckoutById(String checkoutId) throws SQLException, ServiceException;
 
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 

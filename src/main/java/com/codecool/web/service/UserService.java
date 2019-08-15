@@ -1,5 +1,6 @@
 package com.codecool.web.service;
 
+import com.codecool.web.model.Checkout;
 import com.codecool.web.model.User;
 import com.codecool.web.service.exception.ServiceException;
 
@@ -16,4 +17,6 @@ public interface UserService {
     User registerUser(String email, String password, String name, String country, String city, String street, String zip, int money, boolean status) throws SQLException, ServiceException;
 
     User updateUser(int id, String email, String name, String country, String city, String street, String zip, String money) throws SQLException, ServiceException;
+
+    void updateUserMoney(User user, Checkout checkout) throws SQLException;
 }

@@ -1,6 +1,7 @@
 package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.UserDao;
+import com.codecool.web.model.Checkout;
 import com.codecool.web.model.User;
 import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
@@ -67,5 +68,10 @@ public final class SimpleUserService implements UserService {
             throw new ServiceException("Money: Should Be A Number!");
         }
 
+    }
+
+    @Override
+    public void updateUserMoney(User user, Checkout checkout) throws SQLException {
+        userDao.updateUserMoney(user.getId(), (user.getMoney()-checkout.getPrice()));
     }
 }
