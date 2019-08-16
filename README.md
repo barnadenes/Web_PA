@@ -2,7 +2,7 @@
 
 A small web project for my CodeCool Personal Assessment. (Sloth Comics manga store).
 
-To get admin privilidges, use:  -email: user2@user2
+To get admin privileges, use:  -email: user2@user2
                                 -password: admin
                                 
 As an Admin, you'll have access to see the shop income, and orders.
