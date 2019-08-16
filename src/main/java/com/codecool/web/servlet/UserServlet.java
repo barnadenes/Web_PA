@@ -20,7 +20,8 @@ public class UserServlet extends AbstractServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{Connection connection = getConnection(req.getServletContext());
+        try {
+            Connection connection = getConnection(req.getServletContext());
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new SimpleUserService(userDao);
             User current = (User) req.getSession().getAttribute("user");
@@ -38,8 +39,27 @@ public class UserServlet extends AbstractServlet {
 
             sendMessage(resp, HttpServletResponse.SC_OK, userService.findUserById(user.getId()));
         } catch (SQLException | ServiceException e) {
-            handleSqlError(resp,e);
+            handleSqlError(resp, e);
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            Connection connection = getConnection(req.getServletContext());
+            UserDao userDao = new DatabaseUserDao(connection);
+            UserService userService = new SimpleUserService(userDao);
+            User current = (User) req.getSession().getAttribute("user");
+
+            User user = userService.findUserById(current.getId());
+
+            sendMessage(resp, HttpServletResponse.SC_OK, user);
+        } catch (SQLException e) {
+            handleSqlError(resp, e);
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
+            e.printStackTrace();
+        }
+    }
 }

@@ -71,7 +71,12 @@ public final class SimpleUserService implements UserService {
     }
 
     @Override
-    public void updateUserMoney(User user, Checkout checkout) throws SQLException {
-        userDao.updateUserMoney(user.getId(), (user.getMoney()-checkout.getPrice()));
+    public void updateUserMoney(User user, Checkout checkout) throws ServiceException {
+        try {
+            userDao.updateUserMoney(user.getId(), (user.getMoney()-checkout.getPrice()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ServiceException("You don't have enough money!");
+        }
     }
 }

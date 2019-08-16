@@ -18,5 +18,5 @@ public interface UserService {
 
     User updateUser(int id, String email, String name, String country, String city, String street, String zip, String money) throws SQLException, ServiceException;
 
-    void updateUserMoney(User user, Checkout checkout) throws SQLException;
+    void updateUserMoney(User user, Checkout checkout) throws ServiceException;
 }

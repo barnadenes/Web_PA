@@ -1,31 +1,52 @@
-function onUserInfoButtonClicked() {
+function createUserInfo(newUser) {
     clearMessages();
 
     showContents(['site-header', 'carousel', 'user-info-body']);
-    const user = getAuthorization();
     const userFormEl = document.forms['user-form'];
 
     const name = userFormEl.querySelector('input[name="name"]');
-    name.value = user.name;
+    name.value = newUser.name;
 
     const email = userFormEl.querySelector('input[name="email"]');
-    email.value = user.email;
+    email.value = newUser.email;
 
     const country = userFormEl.querySelector('input[name="country"]');
-    country.value = user.country;
+    country.value = newUser.country;
 
     const city = userFormEl.querySelector('input[name="city"]');
-    city.value = user.city;
+    city.value = newUser.city;
 
     const street = userFormEl.querySelector('input[name="street"]');
-    street.value = user.street;
+    street.value = newUser.street;
 
     const zip = userFormEl.querySelector('input[name="zip"]');
-    zip.value = user.zipcode;
+    zip.value = newUser.zipcode;
 
     const money = userFormEl.querySelector('input[name="money"]');
-    money.value = user.money;
+    money.value = newUser.money;
 }
+
+function onUserInfoResponse() {
+    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(itemContentDivEl);
+    removeAllChildren(checkoutContentDivEl);
+
+    if(this.status === OK) {
+        const newUser = JSON.parse(this.responseText);
+        createUserInfo(newUser);
+    } else {
+        onOtherResponse(userInfoButtonDivEl, this);
+    }
+}
+
+function onUserInfoClicked() {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onUserInfoResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'userInfo');
+    xhr.send();
+}
+
 
 function onUIUpdateButtonClicked() {
     const userFormEl = document.forms['user-form'];
@@ -55,16 +76,7 @@ function onUIUpdateButtonClicked() {
 }
 
 function onUserResponse() {
-    removeAllChildren(itemsContentDivEl);
-    removeAllChildren(itemContentDivEl);
-    removeAllChildren(checkoutContentDivEl);
-
     if (this.status === OK) {
-        setUnauthorized();
-
-        const user = JSON.parse(this.responseText);
-        setAuthorization(user);
-        onUserInfoButtonClicked();
         newMessage(userInfoButtonDivEl,'info','UserInfo Updated!');
     }
     else {

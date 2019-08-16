@@ -124,7 +124,7 @@ function onLoad() {
     itemsButtonEl.addEventListener('click', onShopButtonClicked);
 
     const userButtonEl = document.getElementById('nav-user-button');
-    userButtonEl.addEventListener('click', onUserInfoButtonClicked);
+    userButtonEl.addEventListener('click', onUserInfoClicked);
 
     const checkoutButtonEl = document.getElementById('nav-checkout-button');
     checkoutButtonEl.addEventListener('click', onCheckoutButtonClicked);
