@@ -18,6 +18,7 @@ let headerContentDivEl;
 let carouselContentDivEl;
 let registerButtonDivEl;
 let userInfoButtonDivEl;
+let unusedDivEls;
 
 function newInfo(targetEl, message) {
     newMessage(targetEl, 'info', message);
@@ -59,12 +60,14 @@ function showContents(ids) {
 }
 
 function removeAllChildren(el) {
-    while (el.firstChild) {
-        el.removeChild(el.firstChild);
+    for(let i = 0; i < el.length; i++) {
+        while (el[i].firstChild) {
+            el[i].removeChild(el[i].firstChild);
+        }
     }
 }
 
-function onNetworkError(response) {
+function onNetworkError() {
     document.body.remove();
     const bodyEl = document.createElement('body');
     document.appendChild(bodyEl);
@@ -119,6 +122,7 @@ function onLoad() {
     uploadContentDivEl = document.getElementById('admin-add');
     checkoutButtonEl = document.getElementById('nav-checkout-button');
 
+    unusedDivEls = [itemContentDivEl, itemsContentDivEl, orderContentDivEl, checkoutContentDivEl];
     userInfoButtonDivEl.addEventListener('click', onUIUpdateButtonClicked);
     registerButtonDivEl.addEventListener('click', onRegisterButtonClicked);
     orderButtonEl.addEventListener('click', onOrderButtonClicked);

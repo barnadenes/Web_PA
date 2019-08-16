@@ -29,9 +29,7 @@ function onOrderButtonClicked() {
 }
 
 function onOrderResponse() {
-    removeAllChildren(orderContentDivEl);
-    removeAllChildren(itemContentDivEl);
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(unusedDivEls);
     if(this.status === OK) {
         if(getAuthorization().status === true){
             showContents(['site-header', 'carousel', 'order-body', 'nav-add-button', 'nav-order-button']);

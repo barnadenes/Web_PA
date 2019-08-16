@@ -1,6 +1,5 @@
 function onShopButtonClicked() {
-    removeAllChildren(itemContentDivEl);
-    removeAllChildren(checkoutContentDivEl);
+    removeAllChildren(unusedDivEls);
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onItemsResponse);
@@ -10,7 +9,7 @@ function onShopButtonClicked() {
 }
 
 function createItemsTable(items) {
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(unusedDivEls);
     const bodyEl = document.getElementById('shop-body');
 
     for(let i = 0; i < items.length; i++) {

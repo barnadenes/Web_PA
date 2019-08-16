@@ -26,9 +26,7 @@ function createUserInfo(newUser) {
 }
 
 function onUserInfoResponse() {
-    removeAllChildren(itemsContentDivEl);
-    removeAllChildren(itemContentDivEl);
-    removeAllChildren(checkoutContentDivEl);
+    removeAllChildren(unusedDivEls);
 
     if(this.status === OK) {
         if(getAuthorization().status === true){

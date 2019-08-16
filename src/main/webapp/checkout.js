@@ -1,14 +1,13 @@
 function onCheckoutButtonClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onCheckoutResponse);
+    xhr.addEventListener('error', onNetworkError);
     xhr.open('GET', 'cart');
     xhr.send();
 }
 
 function onCheckoutResponse() {
-    removeAllChildren(checkoutContentDivEl);
-    removeAllChildren(itemContentDivEl);
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(unusedDivEls);
     if(this.status === OK) {
         const cartItems = JSON.parse(this.responseText);
         createCartBody(cartItems);

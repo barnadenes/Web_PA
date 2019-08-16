@@ -2,6 +2,7 @@ function onLogoutResponse() {
     if (this.status === OK) {
         setUnauthorized();
         clearMessages();
+        removeAllChildren(unusedDivEls);
         showContents(['login-register-container', 'login-body'])
     } else {
         onOtherResponse(logoutButtonContentDivEl, this);

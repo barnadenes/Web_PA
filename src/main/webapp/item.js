@@ -1,9 +1,8 @@
 function createItemView(item) {
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(unusedDivEls);
     clearMessages();
     const bodyEl = document.getElementById('item-view-body');
     const brEl = document.createElement('br');
-    removeAllChildren(bodyEl);
 
     const itemViewEl = document.createElement('div');
     itemViewEl.setAttribute('class', 'item-view');
@@ -76,7 +75,7 @@ function onItemResponse() {
             showContents(['site-header', 'carousel', 'item-view-body', 'nav-add-button', 'nav-order-button']);
         }
         else{
-            showContents(['site-header', 'carousel', 'order-body', 'nav-checkout-button']);
+            showContents(['site-header', 'carousel', 'item-view-body', 'nav-checkout-button']);
         }
         const text = this.responseText;
         const item = JSON.parse(text);
@@ -89,7 +88,8 @@ function onItemResponse() {
 }
 
 function onItemClicked() {
-    removeAllChildren(itemsContentDivEl);
+    removeAllChildren(unusedDivEls);
+
     const itemId = this.dataset.itemId;
 
     const params = new URLSearchParams();
@@ -117,9 +117,9 @@ function onAddCartClicked() {
 
 function onAddCartResponse() {
     if(this.status === OK) {
-        newMessage(itemContentDivEl, 'info', 'Item has been Added to your Cart!');
+        newMessage(carouselContentDivEl, 'info', 'Item has been Added to your Cart!');
     }
     else
-        onOtherResponse(itemContentDivEl, this);
+        onOtherResponse(carouselContentDivEl, this);
 }
 
