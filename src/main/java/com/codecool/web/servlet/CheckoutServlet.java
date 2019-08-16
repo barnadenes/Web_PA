@@ -66,8 +66,10 @@ public class CheckoutServlet extends AbstractServlet{
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
             handleSqlError(resp, e);
+            e.printStackTrace();
         } catch (ServiceException e) {
             sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
+            e.printStackTrace();
         }
     }
 
@@ -85,6 +87,7 @@ public class CheckoutServlet extends AbstractServlet{
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
             handleSqlError(resp, e);
+            e.printStackTrace();
         }
     }
 }

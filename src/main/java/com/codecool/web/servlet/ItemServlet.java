@@ -7,7 +7,6 @@ import com.codecool.web.service.ItemsService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleItemsService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +18,7 @@ import java.sql.SQLException;
 public class ItemServlet extends AbstractServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             Connection connection = getConnection(req.getServletContext());
             ItemsDao itemsDao = new DatabaseItemsDao(connection);
@@ -29,13 +28,12 @@ public class ItemServlet extends AbstractServlet {
             ShopItems item = itemsService.findItemById(id);
 
             sendMessage(resp, HttpServletResponse.SC_OK, item);
-        } catch (SQLException | ServiceException e) {
+        } catch (SQLException e) {
             handleSqlError(resp, e);
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
     }
 }

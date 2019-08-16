@@ -31,9 +31,11 @@ public final class LoginServlet extends AbstractServlet {
 
             sendMessage(resp, HttpServletResponse.SC_OK, user);
         } catch (ServiceException ex) {
-            sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+            sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED,
+            ex.getMessage());
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            ex.getMessage();
         }
     }
 }

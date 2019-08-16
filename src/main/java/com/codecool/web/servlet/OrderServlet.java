@@ -21,7 +21,6 @@ import com.codecool.web.service.simple.SimpleItemsService;
 import com.codecool.web.service.simple.SimpleOrderService;
 import com.codecool.web.service.simple.SimpleUserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,8 +43,10 @@ public class OrderServlet extends AbstractServlet{
             sendMessage(resp, HttpServletResponse.SC_OK, orders);
         } catch (SQLException e) {
             handleSqlError(resp, e);
+            e.printStackTrace();
         } catch (ServiceException e) {
             sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
+            e.printStackTrace();
         }
     }
 
@@ -73,8 +74,11 @@ public class OrderServlet extends AbstractServlet{
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
             handleSqlError(resp, e);
+            e.printStackTrace();
         } catch (ServiceException e) {
             sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, e);
+            e.printStackTrace();
+
         }
     }
 
