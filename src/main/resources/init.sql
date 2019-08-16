@@ -59,6 +59,10 @@ INSERT INTO checkout (checkout_id, book_title, buyer, price) VALUES
     (3, 'adsfgaggggvvv', 'user1@user1', 5),
     (4, 'LliuztfOL', 'user1@user1', 30);
 
+INSERT INTO orders (order_id, book_title, buyer, price) VALUES
+(1, 'LOL', 'user1@user1', 10),
+(2, 'adsfgaggggvvv', 'user1@user1', 5);
+
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
     ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);

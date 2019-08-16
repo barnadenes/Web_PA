@@ -42,8 +42,26 @@ public class DatabaseItemsDao extends AbstractDao implements ItemsDao {
     }
 
     @Override
-    public void addItem(ShopItem item) throws SQLException {
+    public void addItem(String title, String author, String url, String plot, int price) throws SQLException {
+        boolean autocommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO items(title, author, url, plot, price) " +
+            "VALUES(?, ?, ?, ?, ?)";
 
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, title);
+            ps.setString(2, author);
+            ps.setString(3, url);
+            ps.setString(4, plot);
+            ps.setInt(5, price);
+            executeInsert(ps);
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(autocommit);
+        }
     }
 
     private ShopItems fetchItems(ResultSet rs) throws SQLException {

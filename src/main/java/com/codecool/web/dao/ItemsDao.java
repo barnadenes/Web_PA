@@ -12,5 +12,5 @@ public interface ItemsDao {
 
     ShopItems findItemById(int id) throws SQLException;
 
-    void addItem(ShopItem item) throws SQLException;
+    void addItem(String title, String author, String url, String plot, int price) throws SQLException;
 }

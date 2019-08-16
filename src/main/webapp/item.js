@@ -76,7 +76,7 @@ function onItemResponse() {
             showContents(['site-header', 'carousel', 'item-view-body', 'nav-add-button', 'nav-order-button']);
         }
         else{
-            showContents(['site-header', 'carousel', 'order-body']);
+            showContents(['site-header', 'carousel', 'order-body', 'nav-checkout-button']);
         }
         const text = this.responseText;
         const item = JSON.parse(text);

@@ -35,7 +35,7 @@ function onUserInfoResponse() {
             showContents(['site-header', 'carousel', 'user-info-body', 'nav-add-button', 'nav-order-button']);
         }
         else{
-            showContents(['site-header', 'carousel', 'user-info-body']);
+            showContents(['site-header', 'carousel', 'user-info-body', 'nav-checkout-button']);
         }
         const newUser = JSON.parse(this.responseText);
         createUserInfo(newUser);

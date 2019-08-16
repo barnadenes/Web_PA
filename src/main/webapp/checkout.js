@@ -12,11 +12,11 @@ function onCheckoutResponse() {
     if(this.status === OK) {
         const cartItems = JSON.parse(this.responseText);
         createCartBody(cartItems);
-        showContents(['site-header', 'carousel', 'checkout-body']);
+        showContents(['site-header', 'carousel', 'checkout-body', 'nav-checkout-button']);
     }
     else {
         emptyCartResponse();
-        showContents(['site-header', 'carousel', 'checkout-body']);
+        showContents(['site-header', 'carousel', 'checkout-body', 'nav-checkout-button']);
     }
 }
 

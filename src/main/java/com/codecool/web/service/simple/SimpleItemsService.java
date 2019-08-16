@@ -34,7 +34,17 @@ public final class SimpleItemsService implements ItemsService {
     }
 
     @Override
-    public void addItem(ShopItem item) throws SQLException {
-
+    public void addItem(String title, String author, String url, String plot, String price) throws SQLException, ServiceException {
+        try {
+            if(title.isEmpty() | author.isEmpty() | url.isEmpty() | plot.isEmpty() | price.isEmpty()) {
+                throw new ServiceException("You have to fill all fields!");
+            }
+            else if(Integer.parseInt(price) <= 0) {
+                throw new ServiceException("Price should be more than 0!");
+            }
+            itemsDao.addItem(title, author, url, plot, Integer.parseInt(price));
+        } catch (NumberFormatException e) {
+            throw new ServiceException("Price should be a Number!");
+        }
     }
 }

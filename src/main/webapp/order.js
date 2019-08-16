@@ -7,7 +7,7 @@ function onBuyOrderClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onBuyOrderResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'orders?' + param);
+    xhr.open('PUT', 'orders?' + param);
     xhr.send();
 }
 

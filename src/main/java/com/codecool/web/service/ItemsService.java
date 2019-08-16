@@ -13,5 +13,5 @@ public interface ItemsService {
 
     ShopItems findItemById(String id) throws SQLException, ServiceException;
 
-    void addItem(ShopItem item) throws SQLException;
+    void addItem(String title, String author, String url, String plot, String price) throws SQLException, ServiceException;
 }

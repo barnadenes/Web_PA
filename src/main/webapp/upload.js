@@ -20,16 +20,15 @@ function onUploadButtonClicked() {
     xhr.send(params);
 }
 
-function onUploadClicked() {
-    showContents(['site-header', 'carousel', 'admin-add', 'nav-add-button', 'nav-order-button']);
-}
-
 function onUploadResponse() {
     if(this.status === OK ) {
-        const text = JSON.parse(this.responseText);
         newInfo(carouselContentDivEl, 'Item Uploaded!');
     }
     else {
         onOtherResponse(carouselContentDivEl, this);
     }
+}
+
+function onUploadMenuClicked() {
+    showContents(['site-header', 'carousel', 'admin-add', 'nav-add-button', 'nav-order-button']);
 }

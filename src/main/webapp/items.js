@@ -39,7 +39,7 @@ function onItemsResponse() {
             showContents(['site-header', 'carousel', 'shop-body', 'nav-add-button', 'nav-order-button']);
         }
         else{
-            showContents(['site-header', 'carousel', 'shop-body']);
+            showContents(['site-header', 'carousel', 'shop-body', 'nav-checkout-button']);
         }
         createItemsTable(JSON.parse(this.responseText));
     }
