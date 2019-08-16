@@ -35,7 +35,12 @@ function createItemsTable(items) {
 
 function onItemsResponse() {
     if(this.status === OK) {
-        showContents(['site-header', 'carousel', 'shop-body']);
+        if(getAuthorization().status === true){
+            showContents(['site-header', 'carousel', 'shop-body', 'nav-add-button', 'nav-order-button']);
+        }
+        else{
+            showContents(['site-header', 'carousel', 'shop-body']);
+        }
         createItemsTable(JSON.parse(this.responseText));
     }
     else{

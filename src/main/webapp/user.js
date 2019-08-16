@@ -1,7 +1,6 @@
 function createUserInfo(newUser) {
     clearMessages();
 
-    showContents(['site-header', 'carousel', 'user-info-body']);
     const userFormEl = document.forms['user-form'];
 
     const name = userFormEl.querySelector('input[name="name"]');
@@ -32,6 +31,12 @@ function onUserInfoResponse() {
     removeAllChildren(checkoutContentDivEl);
 
     if(this.status === OK) {
+        if(getAuthorization().status === true){
+            showContents(['site-header', 'carousel', 'user-info-body', 'nav-add-button', 'nav-order-button']);
+        }
+        else{
+            showContents(['site-header', 'carousel', 'user-info-body']);
+        }
         const newUser = JSON.parse(this.responseText);
         createUserInfo(newUser);
     } else {

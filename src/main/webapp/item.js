@@ -50,13 +50,15 @@ function createItemView(item) {
     itemContainerEl.appendChild(brEl);
     itemContainerEl.appendChild(priceEl);
 
-    const addButtonEl = document.createElement('button');
-    addButtonEl.innerHTML = '<b>ADD TO CART</b>';
-    addButtonEl.dataset.itemId = item.id;
-    addButtonEl.setAttribute('id', 'buy-button');
-    addButtonEl.addEventListener('click', onAddCartClicked);
-    itemContainerEl.appendChild(addButtonEl);
-    itemContainerEl.appendChild(brEl);
+    if(getAuthorization().status === false) {
+        const addButtonEl = document.createElement('button');
+        addButtonEl.innerHTML = '<b>ADD TO CART</b>';
+        addButtonEl.dataset.itemId = item.id;
+        addButtonEl.setAttribute('id', 'buy-button');
+        addButtonEl.addEventListener('click', onAddCartClicked);
+        itemContainerEl.appendChild(addButtonEl);
+        itemContainerEl.appendChild(brEl);
+    }
 
     const backButtonEl = document.createElement('button');
     backButtonEl.setAttribute('id', 'back-button');
@@ -70,11 +72,16 @@ function createItemView(item) {
 
 function onItemResponse() {
     if(this.status === OK) {
+        if(getAuthorization().status === true){
+            showContents(['site-header', 'carousel', 'item-view-body', 'nav-add-button', 'nav-order-button']);
+        }
+        else{
+            showContents(['site-header', 'carousel', 'order-body']);
+        }
         const text = this.responseText;
         const item = JSON.parse(text);
 
         createItemView(item);
-        showContents(['site-header', 'carousel', 'item-view-body']);
     }
     else {
         onOtherResponse(itemsContentDivEl ,this);

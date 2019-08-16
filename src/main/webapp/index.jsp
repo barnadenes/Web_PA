@@ -23,6 +23,7 @@
     <c:url value="/items.js" var="itemsScriptUrl"/>
     <c:url value="/item.js" var="itemScriptUrl"/>
     <c:url value="/order.js" var="orderScriptUrl"/>
+    <c:url value="/upload.js" var="uploadScriptUrl"/>
     <c:url value="/checkout.js" var="checkoutScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/register.js" var="registerScriptUrl"/>
@@ -36,6 +37,7 @@
     <script src="${itemsScriptUrl}"></script>
     <script src="${itemScriptUrl}"></script>
     <script src="${orderScriptUrl}"></script>
+    <script src="${uploadScriptUrl}"></script>
     <script src="${checkoutScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
     <script src="${registerScriptUrl}"></script>
@@ -85,8 +87,9 @@
                     <ul id="nav-id">
                         <li id="nav-user-button" class="nav-li-el">User Info</li>
                         <li id="nav-shop-button" class="nav-li-el">Shop</li>
-                        <li id="nav-checkout-button" class="nav-li-el">Checkout</li>
-<%--                        <li id="nav-add-button" class="nav-li-el">Upload</li>--%>
+                        <li id="nav-checkout-button" class="nav-li-el content">Checkout</li>
+                        <li id="nav-order-button" class="nav-li-el hidden content">Orders</li>
+                        <li id="nav-add-button" class="nav-li-el hidden content">Upload</li>
                         <li id="nav-logout-button" class="nav-li-el">Logout</li>
                     </ul>
                 </nav>
@@ -124,14 +127,19 @@
     <div id="checkout-body" class="checkout-body hidden content">
     </div>
 
+    <div id="order-body" class="order-body hidden content">
+    </div>
+
     <div id="admin-add" class="hidden content">
         <h2>Add New Book</h2>
-        <input type="text" placeholder="Title">
-        <input type="text" placeholder="Author">
-        <input type="text" placeholder="URL">
-        <input type="text" placeholder="Price">
-        <textarea name="book" id="" cols="30" rows="10" placeholder="About..."></textarea><br>
-        <button id="create-post"><h2>Create</h2></button>
+        <form id="add-form" onsubmit="return false">
+            <input type="text" value="Title" id="upload-title">
+            <input type="text" value="Author" id="upload-author">
+            <input type="text" value="URL" id="upload-url">
+            <input type="text" value="Price" id="upload-price">
+            <textarea name="book" id="upload-plot" cols="30" rows="10" placeholder="About..."></textarea><br>
+            <button id="create-post"><h2>Create</h2></button>
+        </form>
      </div>
 
 </body>

@@ -19,6 +19,7 @@ function onRegisterButtonClicked() {
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onLoginResponse);
+    xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'register');
     xhr.send(params);
 }

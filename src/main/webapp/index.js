@@ -9,6 +9,9 @@ let loginButtonContentDivEl;
 let itemsContentDivEl;
 let itemContentDivEl;
 let checkoutContentDivEl;
+let orderContentDivEl;
+let orderButtonEl;
+let uploadContentDivEl;
 let logoutButtonContentDivEl;
 let headerContentDivEl;
 let carouselContentDivEl;
@@ -107,12 +110,16 @@ function onLoad() {
     itemsContentDivEl = document.getElementById('shop-body');
     itemContentDivEl = document.getElementById('item-view-body');
     checkoutContentDivEl = document.getElementById('checkout-body');
+    orderContentDivEl = document.getElementById('order-body');
     loginButtonContentDivEl = document.getElementById('login-button');
     userInfoButtonDivEl = document.getElementById('update-user');
     registerButtonDivEl = document.getElementById('register-button');
+    orderButtonEl = document.getElementById('nav-order-button');
+    uploadContentDivEl = document.getElementById('admin-add');
 
     userInfoButtonDivEl.addEventListener('click', onUIUpdateButtonClicked);
     registerButtonDivEl.addEventListener('click', onRegisterButtonClicked);
+    orderButtonEl.addEventListener('click', onOrderButtonClicked);
 
     const loginButtonEl = document.getElementById('login-button');
     loginButtonEl.addEventListener('click', onLoginButtonClicked);
@@ -129,8 +136,8 @@ function onLoad() {
     const checkoutButtonEl = document.getElementById('nav-checkout-button');
     checkoutButtonEl.addEventListener('click', onCheckoutButtonClicked);
 
-    // const addItemButtonEl = document.getElementById('nav-add-button');
-    // addItemButtonEl.addEventListener('click', onAddItemButtonClicked);
+    const addItemButtonEl = document.getElementById('nav-add-button');
+    addItemButtonEl.addEventListener('click', onUploadClicked);
 
     if (hasAuthorization()) {
         onShopButtonClicked(getAuthorization());
