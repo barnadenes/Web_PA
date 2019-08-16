@@ -10,8 +10,6 @@ public interface CheckoutService {
 
     void addToCart(String title, String buyer, int price, int userId, String checkoutId) throws SQLException, ServiceException;
 
-    List<Checkout> findAllCheckout() throws SQLException, ServiceException;
-
     List<Checkout> findCheckoutByUser(int userId) throws SQLException, ServiceException;
 
     Checkout findCheckoutById(String checkoutId) throws SQLException, ServiceException;

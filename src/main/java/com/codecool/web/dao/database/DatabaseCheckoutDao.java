@@ -37,20 +37,6 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
-    public List<Checkout> findAllCheckout() throws SQLException {
-        List<Checkout> items = new ArrayList<>();
-        String sql = "SELECT * FROM checkout";
-
-        try(Statement ps = connection.createStatement();
-            ResultSet rs = ps.executeQuery(sql)) {
-            while(rs.next()){
-                items.add(fetchCheckout(rs));
-            }
-        }
-        return items;
-    }
-
-    @Override
     public List<Checkout> findCheckoutByUser(int userId) throws SQLException {
         List<Checkout> personalList = new ArrayList<>();
         String sql = "SELECT checkout_id, book_title, buyer, price FROM checkout " +

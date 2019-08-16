@@ -29,11 +29,6 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public List<Checkout> findAllCheckout() throws SQLException, ServiceException {
-        return checkoutDao.findAllCheckout();
-    }
-
-    @Override
     public List<Checkout> findCheckoutByUser(int userId) throws SQLException, ServiceException {
         List<Checkout> list = checkoutDao.findCheckoutByUser(userId);
 

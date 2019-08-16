@@ -9,8 +9,6 @@ public interface CheckoutDao {
 
     void addToCart(int id, String title, String buyer, int price) throws SQLException;
 
-    List<Checkout> findAllCheckout() throws SQLException;
-
     List<Checkout> findCheckoutByUser(int userId) throws SQLException;
 
     Checkout findCheckoutById(int checkout_id) throws SQLException;
