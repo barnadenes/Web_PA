@@ -70,7 +70,10 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
 
     @Override
     public void updateUser(int id, String email, String name, String country, String city, String street, String zip, int money) throws SQLException {
+        boolean autocommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
         String sql = "UPDATE users SET (email, name, country, city, street, zip_code, money) = (?, ?, ?, ?, ?, ?, ?) WHERE user_id = ?";
+
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, email);
             ps.setString(2, name);
@@ -81,18 +84,33 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
             ps.setInt(7, money);
             ps.setInt(8, id);
 
-            ps.executeUpdate();
+            executeInsert(ps);
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(autocommit);
         }
     }
 
     @Override
     public void updateUserMoney(int id, int money) throws SQLException {
+        boolean autocommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
         String sql = "UPDATE users SET money = ? WHERE user_id = ?";
+
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, money);
             ps.setInt(2, id);
 
-            ps.executeUpdate();
+            executeInsert(ps);
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(autocommit);
         }
     }
 

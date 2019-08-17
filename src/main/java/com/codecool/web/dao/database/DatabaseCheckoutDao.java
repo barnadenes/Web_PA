@@ -67,22 +67,39 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
 
     @Override
     public void deleteCheckout(int userId , int checkoutId) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
         String sql = "DELETE FROM user_checkout_table WHERE user_id = ? AND checkout_id = ?";
 
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ps.setInt(2, checkoutId);
-            ps.executeUpdate();
+            executeInsert(ps);
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
+        finally {
+            connection.setAutoCommit(autoCommit);
         }
     }
 
     @Override
     public void deleteCheckoutMain(int checkoutId) throws SQLException {
+        boolean autocommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
         String sql = "DELETE FROM checkout WHERE checkout_id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, checkoutId);
-            ps.executeUpdate();
+            executeInsert(ps);
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(autocommit);
         }
     }
 

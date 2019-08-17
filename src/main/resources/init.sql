@@ -9,40 +9,41 @@ DROP TABLE IF EXISTS orders CASCADE ;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    name TEXT NOT NULL,
-    country TEXT NOT NULL,
-    city TEXT NOT NULL,
-    street TEXT NOT NULL,
-    zip_code TEXT NOT NULL,
-    money INTEGER NOT NULL,
+    email VARCHAR(30) UNIQUE NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    country VARCHAR(20) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    street VARCHAR(20) NOT NULL,
+    zip_code VARCHAR(8) NOT NULL,
+    money SMALLINT NOT NULL,
     status BOOLEAN DEFAULT FALSE,
 	CONSTRAINT email_not_empty CHECK (email <> ''),
 	CONSTRAINT password_not_empty CHECK (password <> '')
 );
 
 CREATE TABLE checkout (
-    checkout_id INTEGER PRIMARY KEY,
-    book_title TEXT NOT NULL,
-    buyer TEXT NOT NULL,
-    price INTEGER NOT NULL
+    checkout_id INTEGER,
+    PRIMARY KEY (checkout_id),
+    book_title VARCHAR(30) NOT NULL,
+    buyer VARCHAR(25) NOT NULL,
+    price SMALLINT NOT NULL
 );
 
 CREATE TABLE orders (
     order_id SERIAL,
-    book_title TEXT NOT NULL,
-    buyer TEXT NOT NULL,
-    price INTEGER NOT NULL
+    book_title VARCHAR(30) NOT NULL,
+    buyer VARCHAR(25) NOT NULL,
+    price SMALLINT NOT NULL
 );
 
 CREATE TABLE items (
     item_id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    author TEXT NOT NULL,
+    title VARCHAR(30) NOT NULL,
+    author VARCHAR(25) NOT NULL,
     url TEXT DEFAULT 'https://i.pinimg.com/originals/d6/fc/4f/d6fc4fc1f32a80941f2ee84c1ab6bcea.jpg',
     plot TEXT NOT NULL,
-    price INTEGER NOT NULL
+    price SMALLINT NOT NULL
 );
 
 CREATE TABLE user_checkout_table (
@@ -54,14 +55,12 @@ CREATE TABLE user_checkout_table (
 );
 
 INSERT INTO checkout (checkout_id, book_title, buyer, price) VALUES
-    (1, 'LOL', 'user1@user1', 10),
-    (2, 'adfadf', 'user1@user1', 18),
-    (3, 'adsfgaggggvvv', 'user1@user1', 5),
-    (4, 'LliuztfOL', 'user1@user1', 30);
+    (1, 'Gintama', 'user1@user1', 10),
+    (2, 'Gantz', 'user1@user1', 18);
 
 INSERT INTO orders (order_id, book_title, buyer, price) VALUES
-(1, 'LOL', 'user1@user1', 10),
-(2, 'adsfgaggggvvv', 'user1@user1', 5);
+(1, 'Dr. Stone', 'user1@user1', 10),
+(2, 'Gintama', 'user1@user1', 20);
 
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
@@ -69,9 +68,7 @@ INSERT INTO users (email, password, name, country, city, street, zip_code, money
 
 INSERT INTO user_checkout_table (user_id, checkout_id) VALUES
     (1, 1),
-    (1, 2),
-    (1, 3),
-    (1, 4);
+    (1, 2);
 
 INSERT INTO items (title, author, url, plot, price) VALUES
 	('Dr. Stone', 'Riichiro Inagaki', 'https://i.redd.it/dqpph2imkoe31.jpg', 'One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he''s got a grand plan in mind—to kickstart civilization with the power of science!', 10),
