@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CheckoutDao {
 
-    void addToCart(int id, String title, String buyer, int price) throws SQLException;
+    Integer addToCart(String title, String buyer, int price) throws SQLException;
 
     List<Checkout> findCheckoutByUser(int userId) throws SQLException;
 
@@ -15,9 +15,9 @@ public interface CheckoutDao {
 
     void deleteCheckout(int userId ,int checkoutId) throws SQLException;
 
-    void deleteCheckoutMain(int checkoutId) throws SQLException;
+    void deleteCheckoutMain(int checkout_id, String buyer) throws SQLException;
 
     void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException;
 
-    boolean inCart(int userId, int checkoutId) throws SQLException;
+    boolean inCart(String title, String buyer) throws SQLException;
 }

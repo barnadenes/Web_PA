@@ -45,23 +45,16 @@ public class CheckoutServlet extends AbstractServlet{
         try {Connection connection = getConnection(req.getServletContext());
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
-
-            ItemsDao itemsDao = new DatabaseItemsDao(connection);
-            ItemsService itemsService = new SimpleItemsService(itemsDao);
-
-
-            String itemId = req.getParameter("item_id");
             User user = (User) req.getSession().getAttribute("user");
-            ShopItems shopItems = itemsService.findItemById(itemId);
+
 
             int userId = user.getId();
-            String title = shopItems.getTitle();
+            String title = req.getParameter("title");
             String buyer = user.getEmail();
-            int price = shopItems.getPrice();
+            String price = req.getParameter("price");
 
-            checkoutService.addToCart(title, buyer, price, userId, itemId);
-            checkoutService.addToUserCheckoutTable(userId, itemId);
-
+            int checkout_id = checkoutService.addToCart(title, buyer, price, userId);
+            checkoutService.addToUserCheckoutTable(userId, checkout_id);
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {
@@ -82,7 +75,7 @@ public class CheckoutServlet extends AbstractServlet{
             User user = (User) req.getSession().getAttribute("user");
             String itemId = req.getParameter("delete_id");
 
-            checkoutService.deleteCheckout(user.getId(), itemId);
+            checkoutService.deleteCheckout(user.getId(), itemId, user.getEmail());
 
             sendMessage(resp, HttpServletResponse.SC_OK, "");
         } catch (SQLException e) {

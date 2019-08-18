@@ -5,11 +5,9 @@ function onLoginResponse() {
         if(hasAuthorization()){
             onShopButtonClicked();
         }
-    }else if(this.status === INTERNAL_SERVER_ERROR){
-        onOtherResponse(registerButtonDivEl, this)
     }
     else {
-        onOtherResponse(loginButtonContentDivEl, this);
+        onOtherResponse(loginFormDivEl, this);
     }
 }
 

@@ -17,6 +17,7 @@ function createItemView(item) {
 
     const titleEl = document.createElement('p');
     titleEl.innerHTML =`<strong>Title: </strong>${item.title}`;
+
     itemContainerEl.appendChild(titleEl);
 
     const authorEl = document.createElement('p');
@@ -52,9 +53,11 @@ function createItemView(item) {
     if(getAuthorization().status === false) {
         const addButtonEl = document.createElement('button');
         addButtonEl.innerHTML = '<b>ADD TO CART</b>';
-        addButtonEl.dataset.itemId = item.id;
         addButtonEl.setAttribute('id', 'buy-button');
         addButtonEl.addEventListener('click', onAddCartClicked);
+        addButtonEl.dataset.itemId = item.id;
+        addButtonEl.dataset.titleId = item.title;
+        addButtonEl.dataset.priceId = item.price;
         itemContainerEl.appendChild(addButtonEl);
         itemContainerEl.appendChild(brEl);
     }
@@ -83,7 +86,7 @@ function onItemResponse() {
         createItemView(item);
     }
     else {
-        onOtherResponse(itemsContentDivEl ,this);
+        onOtherResponse(carouselContentDivEl ,this);
     }
 }
 
@@ -103,10 +106,12 @@ function onItemClicked() {
 }
 
 function onAddCartClicked() {
-    const itemId = this.dataset.itemId;
+    const title = this.dataset.titleId;
+    const price = this.dataset.priceId;
 
     const params = new URLSearchParams();
-    params.append('item_id', itemId);
+    params.append('title', title);
+    params.append('price', price);
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAddCartResponse);

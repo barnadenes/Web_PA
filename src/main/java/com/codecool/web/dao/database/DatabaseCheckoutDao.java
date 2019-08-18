@@ -14,33 +14,32 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
-    public void addToCart(int id, String title, String buyer, int price) throws SQLException {
-        boolean autocommit = connection.getAutoCommit();
-        connection.setAutoCommit(false);
-        String sql = "INSERT INTO checkout (checkout_id, book_title, buyer, price) " +
-            "VALUES(?, ?, ?, ?)";
+    public Integer addToCart(String title, String buyer, int price) throws SQLException {
+        String sql = "INSERT INTO checkout (book_title, buyer, price) " +
+            "VALUES(?, ?, ?)";
 
-        try(PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.setString(2, title);
-            ps.setString(3, buyer);
-            ps.setInt(4, price);
+        try(PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, title);
+            ps.setString(2, buyer);
+            ps.setInt(3, price);
+
             executeInsert(ps);
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-            throw e;
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if(rs.next()){
+                return rs.getInt("checkout_id");
+            }
         }
-        finally {
-            connection.setAutoCommit(autocommit);
-        }
+        return null;
     }
 
     @Override
     public List<Checkout> findCheckoutByUser(int userId) throws SQLException {
         List<Checkout> personalList = new ArrayList<>();
-        String sql = "SELECT checkout_id, book_title, buyer, price FROM checkout " +
-            "JOIN users ON users.email = checkout.buyer WHERE user_id = ?";
+        String sql = "SELECT  users.user_id, checkout.checkout_id, book_title, buyer, price FROM checkout " +
+        "JOIN user_checkout_table ON user_checkout_table.checkout_id = checkout.checkout_id " +
+        "JOIN users ON user_checkout_table.user_id = users.user_id " +
+        "WHERE users.user_id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs =  ps.executeQuery();
@@ -86,13 +85,14 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
-    public void deleteCheckoutMain(int checkoutId) throws SQLException {
+    public void deleteCheckoutMain(int checkout_id, String buyer) throws SQLException {
         boolean autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "DELETE FROM checkout WHERE checkout_id = ?";
+        String sql = "DELETE FROM checkout WHERE checkout_id = ? AND buyer = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, checkoutId);
+            ps.setInt(1, checkout_id);
+            ps.setString(2, buyer);
             executeInsert(ps);
             connection.commit();
         } catch (SQLException e) {
@@ -104,12 +104,12 @@ public class DatabaseCheckoutDao extends AbstractDao implements CheckoutDao {
     }
 
     @Override
-    public boolean inCart(int userId, int checkoutId) throws SQLException {
-        String sql =  "SELECT * FROM user_checkout_table WHERE user_id = ? AND checkout_id = ?";
+    public boolean inCart(String title, String buyer) throws SQLException {
+        String sql =  "SELECT * FROM checkout WHERE book_title = ? AND buyer = ?";
 
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, userId);
-            ps.setInt(2, checkoutId);
+            ps.setString(1, title);
+            ps.setString(2, buyer);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 return true;

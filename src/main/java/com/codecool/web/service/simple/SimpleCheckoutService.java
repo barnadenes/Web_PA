@@ -17,15 +17,11 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void addToCart(String title, String buyer, int price, int userId, String checkoutId) throws SQLException, ServiceException {
-        int id = Integer.parseInt(checkoutId);
-
-        if(!inCart(userId, id)) {
-            checkoutDao.addToCart(id, title, buyer, price);
+    public Integer addToCart(String title, String buyer, String price, int userId) throws SQLException, ServiceException {
+        if(inCart(title, buyer)) {
+            throw new ServiceException("Already In Cart!");
         }
-        else {
-            throw new ServiceException("Already Purchased! / In Cart!");
-        }
+        return checkoutDao.addToCart(title, buyer, Integer.valueOf(price));
     }
 
     @Override
@@ -51,25 +47,25 @@ public final class SimpleCheckoutService implements CheckoutService {
     }
 
     @Override
-    public void deleteCheckout(int userId, String checkoutId) throws SQLException {
+    public void deleteCheckout(int userId, String checkoutId, String buyer) throws SQLException {
         int checkoutID = Integer.parseInt(checkoutId);
 
         checkoutDao.deleteCheckout(userId, checkoutID);
-        deleteMainCheckout(checkoutID);
+        deleteMainCheckout(checkoutID, buyer);
     }
 
     @Override
-    public void deleteMainCheckout(int checkoutId) throws SQLException {
-        checkoutDao.deleteCheckoutMain(checkoutId);
+    public void deleteMainCheckout(int checkout_id, String buyer) throws SQLException {
+        checkoutDao.deleteCheckoutMain(checkout_id, buyer);
     }
 
     @Override
-    public void addToUserCheckoutTable(int userId, String checkoutId) throws SQLException {
-        checkoutDao.addToUserCheckoutTable(userId, Integer.parseInt(checkoutId));
+    public void addToUserCheckoutTable(int userId, int checkoutId) throws SQLException {
+        checkoutDao.addToUserCheckoutTable(userId, checkoutId);
     }
 
     @Override
-    public boolean inCart(int userId, int checkoutId) throws SQLException {
-        return checkoutDao.inCart(userId, checkoutId);
+    public boolean inCart(String title, String buyer) throws SQLException {
+        return checkoutDao.inCart(title, buyer);
     }
 }

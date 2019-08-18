@@ -5,6 +5,7 @@ const NOT_FOUND = 404;
 const INTERNAL_SERVER_ERROR = 500;
 
 let loginContentDivEl;
+let loginFormDivEl;
 let loginButtonContentDivEl;
 let itemsContentDivEl;
 let itemContentDivEl;
@@ -109,6 +110,7 @@ function setUnauthorized() {
 function onLoad() {
     localStorage.clear();
     loginContentDivEl = document.getElementById('login-register-container');
+    loginFormDivEl = document.getElementById('error-info-hr');
     headerContentDivEl = document.getElementById('site-header');
     carouselContentDivEl = document.getElementById('carousel');
     itemsContentDivEl = document.getElementById('shop-body');

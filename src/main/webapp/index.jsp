@@ -52,7 +52,7 @@
             <div id="login-register-header-button">
                 <button id="login" onclick="onLoginMenuButtonClicked()">Login</button>
                 <button id="register" onclick="onRegisterMenuButtonClicked()">Register</button>
-            </div><hr>
+            </div><hr id="error-info-hr">
             <h1>Sloth Comics</h1><hr>
             <div id="login-body" class="content">
                 <i class="fa fa-book" style="font-size:48px;color: rgb(241, 152, 42)"></i><br><br>
