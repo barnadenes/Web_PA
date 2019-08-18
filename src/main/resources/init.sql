@@ -14,7 +14,7 @@ CREATE TABLE users (
     name VARCHAR(25) NOT NULL,
     country VARCHAR(20) NOT NULL,
     city VARCHAR(30) NOT NULL,
-    street VARCHAR(20) NOT NULL,
+    street VARCHAR(30) NOT NULL,
     zip_code VARCHAR(8) NOT NULL,
     money SMALLINT NOT NULL,
     status BOOLEAN DEFAULT FALSE,
@@ -23,11 +23,12 @@ CREATE TABLE users (
 );
 
 CREATE TABLE checkout (
-    checkout_id INTEGER,
+    checkout_id SERIAL,
     PRIMARY KEY (checkout_id),
     book_title VARCHAR(30) NOT NULL,
     buyer VARCHAR(25) NOT NULL,
     price SMALLINT NOT NULL
+
 );
 
 CREATE TABLE orders (
@@ -54,17 +55,18 @@ CREATE TABLE user_checkout_table (
     FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id)
 );
 
-INSERT INTO checkout (checkout_id, book_title, buyer, price) VALUES
-    (1, 'Gintama', 'user1@user1', 10),
-    (2, 'Gantz', 'user1@user1', 18);
+INSERT INTO checkout (book_title, buyer, price) VALUES
+    ('Gintama', 'user1@user1', 10),
+    ('Gantz', 'user1@user1', 18);
 
-INSERT INTO orders (order_id, book_title, buyer, price) VALUES
-(1, 'Dr. Stone', 'user1@user1', 10),
-(2, 'Gintama', 'user1@user1', 20);
+INSERT INTO orders (book_title, buyer, price) VALUES
+('Dr. Stone', 'user1@user1', 10),
+('Gantz', 'user1@user1', 20);
 
 INSERT INTO users (email, password, name, country, city, street, zip_code, money, status) VALUES
 	('user1@user1', 'user1', 'Denes', 'Hungary', 'Miskolc', 'Fun st.', 2144, 20, FALSE),
-    ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE);
+    ('user2@user2', 'admin', 'admin', 'Hell', 'Nightmare', 'Elm st.', 6699, 9999, TRUE),
+    ('user3@user3', 'user3', 'Batman', 'USA', 'Gotham', '1007 Mountain Drive', '214K4', 900, FALSE);
 
 INSERT INTO user_checkout_table (user_id, checkout_id) VALUES
     (1, 1),
