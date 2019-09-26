@@ -25,7 +25,7 @@ import java.util.List;
 public class CheckoutServlet extends AbstractServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())) {
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
             User user = (User) req.getSession().getAttribute("user");
@@ -42,7 +42,8 @@ public class CheckoutServlet extends AbstractServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext()))
+        {
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
             User user = (User) req.getSession().getAttribute("user");
@@ -68,7 +69,7 @@ public class CheckoutServlet extends AbstractServlet{
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())){
             CheckoutDao checkoutDao = new DatabaseCheckoutDao(connection);
             CheckoutService checkoutService = new SimpleCheckoutService(checkoutDao);
 

@@ -34,7 +34,7 @@ public class OrderServlet extends AbstractServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())) {
             OrderDao orderDao = new DatabaseOrderDao(connection);
             OrderService  orderService = new SimpleOrderService(orderDao);
 
@@ -52,7 +52,7 @@ public class OrderServlet extends AbstractServlet{
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection  = getConnection(req.getServletContext());
+        try (Connection connection  = getConnection(req.getServletContext())) {
             OrderDao orderDao = new DatabaseOrderDao(connection);
             OrderService  orderService = new SimpleOrderService(orderDao);
 
@@ -84,7 +84,7 @@ public class OrderServlet extends AbstractServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())) {
             ItemsDao itemsDao = new DatabaseItemsDao(connection);
             ItemsService itemsService = new SimpleItemsService(itemsDao);
 

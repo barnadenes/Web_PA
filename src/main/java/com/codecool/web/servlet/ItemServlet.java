@@ -19,8 +19,7 @@ public class ItemServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())) {
             ItemsDao itemsDao = new DatabaseItemsDao(connection);
             ItemsService itemsService = new SimpleItemsService(itemsDao);
             String id = req.getParameter("id");

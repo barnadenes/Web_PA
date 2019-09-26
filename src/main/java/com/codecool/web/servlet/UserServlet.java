@@ -19,8 +19,7 @@ public class UserServlet extends AbstractServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())) {
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new SimpleUserService(userDao);
             User current = (User) req.getSession().getAttribute("user");
@@ -48,8 +47,7 @@ public class UserServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            Connection connection = getConnection(req.getServletContext());
+        try (Connection connection = getConnection(req.getServletContext())){
             UserDao userDao = new DatabaseUserDao(connection);
             UserService userService = new SimpleUserService(userDao);
             User current = (User) req.getSession().getAttribute("user");
